@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>친정엄마 산후도우미 30초 계산기 & 가이드 | 김똑디</title>
+  <style>
+    :root {
+      --bg: #fffaf6;
+      --card: #ffffff;
+      --primary: #e87a5d;
+      --primary-soft: #fff0eb;
+      --accent: #2f7d6d;
+      --accent-soft: #eaf5f2;
+      --warn: #b45309;
+      --warn-soft: #fef3c7;
+      --text: #222222;
+      --muted: #666666;
+      --border: #efe6df;
+      --radius: 18px;
+      --shadow: 0 4px 16px rgba(45, 30, 20, 0.04);
+      --result-bg: linear-gradient(135deg, #2f7d6d 0%, #236154 100%);
+      --result-text: #ffffff;
+      --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
+    }
+
+    /* 1. 파스텔 살구 (기본) */
+    body[data-theme="1"] {
+      --bg: #fffaf6; --card: #ffffff; --primary: #e87a5d; --primary-soft: #fff0eb;
+      --accent: #2f7d6d; --accent-soft: #eaf5f2; --text: #222222; --muted: #666666;
+      --border: #efe6df; --radius: 18px; --result-bg: linear-gradient(135deg, #2f7d6d 0%, #236154 100%);
+    }
+    /* 2. 토스 클린 (화이트·블루) */
+    body[data-theme="2"] {
+      --bg: #f2f4f6; --card: #ffffff; --primary: #3182f6; --primary-soft: #e8f3ff;
+      --accent: #1b64da; --accent-soft: #e8f3ff; --text: #191f28; --muted: #6b7684;
+      --border: #e5e8eb; --radius: 20px; --shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+      --result-bg: linear-gradient(135deg, #3182f6 0%, #1b64da 100%);
+    }
+    /* 3. 모던 에디토리얼 (아이보리·세리프) */
+    body[data-theme="3"] {
+      --bg: #f6f3ec; --card: #fffdf9; --primary: #6b4f3a; --primary-soft: #efe7dc;
+      --accent: #3d5a45; --accent-soft: #e6ede8; --text: #2b241d; --muted: #75685a;
+      --border: #dfd6c7; --radius: 8px; --shadow: none;
+      --result-bg: #2b241d;
+      --font: "Nanum Myeongjo", Georgia, serif;
+    }
+    /* 4. 민트 세이지 (자연주의) */
+    body[data-theme="4"] {
+      --bg: #f2f7f4; --card: #ffffff; --primary: #2d6a4f; --primary-soft: #d8f3dc;
+      --accent: #40916c; --accent-soft: #e9f5ee; --text: #1b4332; --muted: #52796f;
+      --border: #cfe4d7; --radius: 22px; --result-bg: linear-gradient(135deg, #40916c 0%, #2d6a4f 100%);
+    }
+    /* 5. 버터 옐로우 (포근한 아기방) */
+    body[data-theme="5"] {
+      --bg: #fffdf2; --card: #ffffff; --primary: #d97706; --primary-soft: #fef3c7;
+      --accent: #92400e; --accent-soft: #fde68a; --text: #451a03; --muted: #78350f;
+      --border: #f5e6b3; --radius: 24px; --result-bg: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+    /* 6. 다크 네온 테크 (11년차 개발자) */
+    body[data-theme="6"] {
+      --bg: #0f172a; --card: #1e293b; --primary: #10b981; --primary-soft: rgba(16, 185, 129, 0.16);
+      --accent: #34d399; --accent-soft: rgba(52, 211, 153, 0.16); --warn: #fbbf24; --warn-soft: rgba(251, 191, 36, 0.15);
+      --text: #f8fafc; --muted: #94a3b8; --border: #334155; --radius: 14px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.3); --result-bg: linear-gradient(135deg, #059669 0%, #047857 100%);
+    }
+    /* 7. 라벤더 드림 (소프트 퍼플) */
+    body[data-theme="7"] {
+      --bg: #faf7ff; --card: #ffffff; --primary: #7c3aed; --primary-soft: #ede9fe;
+      --accent: #5b21b6; --accent-soft: #f3e8ff; --text: #2e1065; --muted: #6b5b95;
+      --border: #e9d5ff; --radius: 20px; --result-bg: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+    }
+    /* 8. 노션 미니멀 (흑백 문서형) */
+    body[data-theme="8"] {
+      --bg: #ffffff; --card: #ffffff; --primary: #111111; --primary-soft: #f1f1ef;
+      --accent: #111111; --accent-soft: #f1f1ef; --text: #111111; --muted: #787774;
+      --border: #e3e2de; --radius: 8px; --shadow: none; --result-bg: #191919;
+    }
+    /* 9. 다꾸·픽셀 레트로 (볼드 보더) */
+    body[data-theme="9"] {
+      --bg: #fff3f8; --card: #ffffff; --primary: #ff4d8d; --primary-soft: #ffe0ec;
+      --accent: #00a896; --accent-soft: #d9f8f4; --text: #1a1a1a; --muted: #555555;
+      --border: #1a1a1a; --radius: 12px; --shadow: 4px 4px 0px #1a1a1a;
+      --result-bg: #ff4d8d;
+    }
+    /* 10. 글래스모피즘 (반투명 그라데이션) */
+    body[data-theme="10"] {
+      --bg: linear-gradient(160deg, #ffe4e6 0%, #e0e7ff 50%, #dcfce7 100%);
+      --card: rgba(255, 255, 255, 0.72); --primary: #ec4899; --primary-soft: rgba(236, 72, 153, 0.14);
+      --accent: #6366f1; --accent-soft: rgba(99, 102, 241, 0.14); --text: #1e1b4b; --muted: #4b5563;
+      --border: rgba(255, 255, 255, 0.8); --radius: 22px; --shadow: 0 8px 30px rgba(31, 38, 135, 0.08);
+      --result-bg: linear-gradient(135deg, #ec4899 0%, #6366f1 100%);
+    }
+
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--bg);
+      background-attachment: fixed;
+      color: var(--text);
+      line-height: 1.55;
+      padding-bottom: 56px;
+      transition: background 0.25s, color 0.2s;
+    }
+
+    /* 테마 스위처 바 */
+    .theme-bar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      padding: 10px 12px;
+    }
+    body[data-theme="6"] .theme-bar {
+      background: rgba(15, 23, 42, 0.9);
+      border-bottom-color: #334155;
+    }
+    .theme-bar-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+      margin: 0 0 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .theme-scroll {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+    .theme-scroll::-webkit-scrollbar { display: none; }
+    .theme-chip {
+      flex-shrink: 0;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 11px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+    .theme-chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .wrap { max-width: 480px; margin: 0 auto; padding: 18px 16px; }
+    .brand {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary-soft); color: var(--primary);
+      font-weight: 700; font-size: 12px; padding: 5px 11px;
+      border-radius: 999px; margin-bottom: 10px;
+    }
+    h1 { font-size: 22px; line-height: 1.32; margin: 0 0 8px; letter-spacing: -0.02em; }
+    .subtitle { font-size: 13.5px; color: var(--muted); margin: 0 0 18px; }
+
+    .tabs {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px;
+      background: var(--primary-soft); padding: 5px; border-radius: calc(var(--radius) * 0.8);
+      margin-bottom: 18px;
+    }
+    .tab-btn {
+      border: none; background: transparent; padding: 9px 6px;
+      border-radius: calc(var(--radius) * 0.6); font-size: 13px; font-weight: 700;
+      color: var(--muted); cursor: pointer; font-family: inherit;
+    }
+    .tab-btn.active {
+      background: var(--card); color: var(--text);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    .label {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
+    }
+    .step-num {
+      display: inline-flex; width: 20px; height: 20px; align-items: center; justify-content: center;
+      background: var(--primary); color: #fff; border-radius: 50%; font-size: 11px;
+    }
+    .choices { display: grid; gap: 8px; }
+    .choices.cols-2 { grid-template-columns: 1fr 1fr; }
+    .choices.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .choice {
+      border: 1.5px solid var(--border); background: transparent;
+      border-radius: calc(var(--radius) * 0.72); padding: 11px 10px;
+      text-align: left; cursor: pointer; font-family: inherit;
+    }
+    .choice.selected { border-color: var(--primary); background: var(--primary-soft); }
+    .choice-title { font-size: 13.5px; font-weight: 700; color: var(--text); display: block; }
+    .choice-desc { font-size: 11.5px; color: var(--muted); margin-top: 2px; display: block; }
+
+    .result-box {
+      background: var(--result-bg);
+      color: var(--result-text);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      margin-bottom: 14px;
+      box-shadow: var(--shadow);
+    }
+    body[data-theme="9"] .result-box { border: 2px solid #1a1a1a; }
+    .result-badge {
+      display: inline-block; background: rgba(255,255,255,0.2);
+      font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
+    }
+    .result-main-label { font-size: 13px; opacity: 0.92; }
+    .result-main-val { font-size: 27px; font-weight: 800; letter-spacing: -0.02em; margin: 2px 0 4px; }
+    .result-sub { font-size: 12.5px; opacity: 0.9; margin-bottom: 16px; }
+    .metrics {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+      background: rgba(255,255,255,0.14); border-radius: 13px; padding: 12px 10px; text-align: center;
+    }
+    .metric-k { font-size: 11px; opacity: 0.88; margin-bottom: 3px; }
+    .metric-v { font-size: 14px; font-weight: 700; }
+
+    .note-box {
+      background: var(--warn-soft); color: var(--warn);
+      border-radius: calc(var(--radius) * 0.8); padding: 13px 14px; font-size: 12.5px; margin-top: 10px;
+    }
+    body[data-theme="6"] .note-box { color: #fde68a; }
+
+    .info-card h3 { margin: 0 0 8px; font-size: 15.5px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .info-card p, .info-card li { font-size: 13.5px; color: var(--text); opacity: 0.9; margin: 0 0 6px; }
+    .info-card ul { padding-left: 18px; margin: 6px 0 0; }
+    .pill {
+      display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px;
+      border-radius: 999px; background: var(--accent-soft); color: var(--accent);
+    }
+    .pill.warn { background: var(--warn-soft); color: var(--warn); }
+
+    .progress-wrap { background: var(--border); height: 8px; border-radius: 999px; overflow: hidden; margin: 8px 0 14px; }
+    .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.2s; }
+    .check-item {
+      display: flex; align-items: flex-start; gap: 10px; padding: 12px 0;
+      border-bottom: 1px solid var(--border); cursor: pointer;
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-item input { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+    .check-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .check-text span { display: block; font-size: 12.5px; color: var(--muted); }
+    .check-item.done .check-text strong { text-decoration: line-through; opacity: 0.5; }
+    .footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 22px; padding: 0 8px; }
+  </style>
+</head>
+<body data-theme="1">
+  <!-- 10가지 디자인 비교용 스위처 -->
+  <div class="theme-bar">
+    <div class="theme-bar-title">
+      <span>🎨 디자인 10종 미리보기</span>
+      <span id="theme-name">1. 파스텔 살구</span>
+    </div>
+    <div class="theme-scroll">
+      <button class="theme-chip active" onclick="setTheme(1, '1. 파스텔 살구', this)">1. 파스텔 살구</button>
+      <button class="theme-chip" onclick="setTheme(2, '2. 토스 클린', this)">2. 토스 클린</button>
+      <button class="theme-chip" onclick="setTheme(3, '3. 에디토리얼', this)">3. 에디토리얼</button>
+      <button class="theme-chip" onclick="setTheme(4, '4. 민트 세이지', this)">4. 민트 세이지</button>
+      <button class="theme-chip" onclick="setTheme(5, '5. 버터 옐로우', this)">5. 버터 옐로우</button>
+      <button class="theme-chip" onclick="setTheme(6, '6. 다크 개발자', this)">6. 다크 개발자</button>
+      <button class="theme-chip" onclick="setTheme(7, '7. 라벤더 드림', this)">7. 라벤더 드림</button>
+      <button class="theme-chip" onclick="setTheme(8, '8. 노션 미니멀', this)">8. 노션 미니멀</button>
+      <button class="theme-chip" onclick="setTheme(9, '9. 다꾸 레트로', this)">9. 다꾸 레트로</button>
+      <button class="theme-chip" onclick="setTheme(10, '10. 글래스 파스텔', this)">10. 글래스 파스텔</button>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="brand">👶 @ddokdi.kim · 김똑디 출산준비</div>
+    <h1>친정엄마 산후도우미<br/>30초 계산기 & 핵심 가이드</h1>
+    <p class="subtitle">2026년 보건복지부 「산모·신생아 건강관리 지원사업」 지침 기준으로 정리했어요.</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('calc', this)">🧮 30초 계산기</button>
+      <button class="tab-btn" onclick="switchTab('info', this)">📌 핵심 정리</button>
+      <button class="tab-btn" onclick="switchTab('check', this)">✅ 체크리스트</button>
+    </div>
+
+    <div id="tab-calc" class="section active">
+      <div class="card">
+        <div class="label"><span class="step-num">1</span> 어머님 진행 방식</div>
+        <div class="choices cols-2">
+          <button class="choice selected" data-group="path" data-val="A" onclick="selectOpt(this)">
+            <span class="choice-title">교육 이수 (일반)</span>
+            <span class="choice-desc">60시간 교육 + 기관 등록<br/>지역 제한·감산 없음</span>
+          </button>
+          <button class="choice" data-group="path" data-val="B" onclick="selectOpt(this)">
+            <span class="choice-title">예외 인정 (가족)</span>
+            <span class="choice-desc">섬·벽지·분만취약지 등<br/>같은 시·군·구 · 50% 감산</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label"><span class="step-num">2</span> 소득 유형 (단태아 첫째 기준)</div>
+        <div class="choices cols-3">
+          <button class="choice selected" data-group="income" data-val="ga" onclick="selectOpt(this)">
+            <span class="choice-title">가형</span>
+            <span class="choice-desc">기초·차상위·중위100%↓</span>
+          </button>
+          <button class="choice" data-group="income" data-val="tong" onclick="selectOpt(this)">
+            <span class="choice-title">통합형</span>
+            <span class="choice-desc">중위 100~150%↓</span>
+          </button>
+          <button class="choice" data-group="income" data-val="la" onclick="selectOpt(this)">
+            <span class="choice-title">라형</span>
+            <span class="choice-desc">150% 초과 예외 등</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label"><span class="step-num">3</span> 이용 기간</div>
+        <div class="choices cols-3">
+          <button class="choice" data-group="days" data-val="5" onclick="selectOpt(this)">
+            <span class="choice-title">5일 (단축)</span>
+            <span class="choice-desc">1주 평일 기준</span>
+          </button>
+          <button class="choice selected" data-group="days" data-val="10" onclick="selectOpt(this)">
+            <span class="choice-title">10일 (표준)</span>
+            <span class="choice-desc">2주 · 가장 기본</span>
+          </button>
+          <button class="choice" data-group="days" data-val="15" onclick="selectOpt(this)">
+            <span class="choice-title">15일 (연장)</span>
+            <span class="choice-desc">3주 이용 시</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <div class="result-badge" id="res-badge">길 A · 일반(가족) · 감산 없음</div>
+        <div class="result-main-label">어머님 예상 수령 급여 (서비스가격 75% 이상 · 세전)</div>
+        <div class="result-main-val" id="res-wage">최소 1,098,000원</div>
+        <div class="result-sub" id="res-daily">하루 약 109,800원 수준 (주 5일·일 9시간 원칙)</div>
+        <div class="metrics">
+          <div><div class="metric-k">총 서비스가격</div><div class="metric-v" id="res-total">1,464,000원</div></div>
+          <div><div class="metric-k">정부지원금</div><div class="metric-v" id="res-gov">1,165,000원</div></div>
+          <div><div class="metric-k">내 본인부담</div><div class="metric-v" id="res-self">299,000원</div></div>
+        </div>
+      </div>
+
+      <div class="note-box" id="res-note"></div>
+    </div>
+
+    <div id="tab-info" class="section">
+      <div class="card info-card">
+        <h3>1. 친정엄마·시어머니 다 가능할까? <span class="pill">둘 다 가능</span></h3>
+        <p>흔히 "4촌 이내"라고 헷갈리는데, 그건 바우처 <strong>신청권자</strong> 범위이고 제공인력 가족 범위는 아래처럼 정해져 있어요.</p>
+        <ul>
+          <li><strong>친정엄마</strong> (직계혈족) · <strong>시어머니</strong> (배우자의 직계혈족) 모두 가능</li>
+          <li>배우자, 형제·자매, 직계혈족의 배우자 등도 포함</li>
+        </ul>
+      </div>
+      <div class="card info-card">
+        <h3>2. 엄마가 준비할 것: 60시간 교육 + 기관 등록</h3>
+        <p>민간 자격증이 아니라 <strong>시·도 지정 교육기관</strong> 수료가 필수예요.</p>
+        <ul>
+          <li><strong>신규 60시간</strong> (이론 28h + 실기 32h) / <strong>경력 40시간</strong> (요양보호사·간호사 등)</li>
+          <li>교육비 자부담 (기관별 상이, 서울 기준 약 20~25만 원대)</li>
+          <li>수료 후 반드시 <strong>제공기관(업체) 소속 등록</strong> 후 산모와 매칭해야 지원금 지급</li>
+        </ul>
+      </div>
+      <div class="card info-card">
+        <h3>3. 산모 신청 기간 & 바우처 유효기간</h3>
+        <ul>
+          <li><strong>신청 기간:</strong> 출산예정일 <strong>40일 전 ~ 출산일로부터 60일 이내</strong> (복지로·정부24·보건소)</li>
+          <li><strong>유효기간:</strong> 출산일로부터 <strong>90일 이내</strong> (미숙아 입원 시 퇴원일 기준 예외)</li>
+          <li><strong>소득 기준:</strong> 기준중위소득 150% 이하 (초과 가구는 지자체별 예외지원 확인)</li>
+        </ul>
+      </div>
+      <div class="card info-card">
+        <h3>4. 절대 놓치면 안 되는 주의사항 <span class="pill warn">필수 확인</span></h3>
+        <ul>
+          <li><strong>가족관계 미신고 시 부당이득 환수:</strong> 반드시 '일반(가족)' 또는 '인정(가족)'으로 등록해야 해요. 숨기면 추후 산모와 기관이 연대해 지원금을 환수당할 수 있어요.</li>
+          <li><strong>첫만남이용권 결제:</strong> 제공기관 가맹 여부·결제 방식마다 달라서 사전에 기관에 꼭 문의하세요.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="tab-check" class="section">
+      <div class="card">
+        <div class="label" style="justify-content: space-between; margin-bottom: 4px;">
+          <span>준비 진행률</span>
+          <span id="check-progress-text" style="color: var(--accent);">0 / 6 완료</span>
+        </div>
+        <div class="progress-wrap"><div class="progress-bar" id="check-progress-bar"></div></div>
+        <label class="check-item"><input type="checkbox" data-id="c1" onchange="toggleCheck(this)" /><div class="check-text"><strong>1. 관할 보건소에서 우리 지역 예외지원·인정가족 여부 확인</strong><span>건보료 150% 초과 예외지원 및 지역별 추가 지원금 확인</span></div></label>
+        <label class="check-item"><input type="checkbox" data-id="c2" onchange="toggleCheck(this)" /><div class="check-text"><strong>2. 어머님 시·도 지정 교육기관 등록 & 60시간(경력 40시간) 이수</strong><span>전자바우처 교육관리시스템 수료증 발급 확인</span></div></label>
+        <label class="check-item"><input type="checkbox" data-id="c3" onchange="toggleCheck(this)" /><div class="check-text"><strong>3. 산모·신생아 건강관리 제공기관(업체)에 어머님 소속 등록</strong><span>가족 매칭 가능 여부와 급여 정산 비율(75%↑) 사전 확인</span></div></label>
+        <label class="check-item"><input type="checkbox" data-id="c4" onchange="toggleCheck(this)" /><div class="check-text"><strong>4. 출산예정 40일 전 ~ 출산 후 60일 이내 바우처 신청</strong><span>복지로 또는 관할 보건소 방문 신청</span></div></label>
+        <label class="check-item"><input type="checkbox" data-id="c5" onchange="toggleCheck(this)" /><div class="check-text"><strong>5. 제공기관에 '가족관계' 명시 후 지정 배정</strong><span>시스템상 일반(가족) 또는 인정(가족) 등록 여부 꼭 체크</span></div></label>
+        <label class="check-item"><input type="checkbox" data-id="c6" onchange="toggleCheck(this)" /><div class="check-text"><strong>6. 본인부담금 결제 수단(첫만남이용권 가능 여부 등) 확인</strong><span>출산 후 90일 이내 서비스 개시하기</span></div></label>
+      </div>
+    </div>
+
+    <div class="footer">
+      제작: @ddokdi.kim · 2026 보건복지부 공식 안내 지침 기반<br/>
+      지자체 및 가구 조건에 따라 달라질 수 있으니 신청 전 관할 보건소에 꼭 확인해 주세요.
+    </div>
+  </div>
+
+  <script>
+    const state = { path: 'A', income: 'ga', days: 10 };
+    const DATA = {
+      A: {
+        label: '길 A · 일반(가족) · 감산 없음', total10: 1464000,
+        gov10: { ga: 1165000, tong: 1002000, la: 764000 },
+        note: '💡 <strong>일반(가족)</strong>은 교육 이수+제공기관 등록 기준이며 감산이 없습니다. (표준 10일은 2026 지침 공식 금액표 기준, 5일·15일은 일할 비례 참고치입니다.)'
+      },
+      B: {
+        label: '길 B · 인정(가족) · 50% 감산', total10: 676000,
+        gov10: { ga: 541000, tong: 466000, la: 350000 },
+        note: '⚠️ <strong>인정(가족)</strong>은 교육 없이 섬·벽지·분만취약지 등 지자체 예외 인정 시에만 가능하며, 산모와 같은 시·군·구 거주 필수 및 50% 감산됩니다.'
+      }
+    };
+    const fmt = (n) => Math.round(n).toLocaleString('ko-KR') + '원';
+
+    function setTheme(num, name, btn) {
+      document.body.setAttribute('data-theme', num);
+      document.getElementById('theme-name').textContent = name;
+      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
+      btn.classList.add('active');
+    }
+    function switchTab(tab, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + tab).classList.add('active');
+    }
+    function selectOpt(btn) {
+      const group = btn.dataset.group;
+      document.querySelectorAll(`.choice[data-group="${group}"]`).forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state[group] = group === 'days' ? Number(btn.dataset.val) : btn.dataset.val;
+      render();
+    }
+    function render() {
+      const d = DATA[state.path], ratio = state.days / 10;
+      const total = d.total10 * ratio, gov = d.gov10[state.income] * ratio, self = total - gov, wage = total * 0.75;
+      document.getElementById('res-badge').textContent = d.label;
+      document.getElementById('res-wage').textContent = '최소 ' + fmt(wage);
+      document.getElementById('res-daily').textContent = `하루 약 ${fmt(wage / state.days)} 수준 (주 5일·일 9시간 원칙)`;
+      document.getElementById('res-total').textContent = fmt(total);
+      document.getElementById('res-gov').textContent = fmt(gov);
+      document.getElementById('res-self').textContent = fmt(self);
+      document.getElementById('res-note').innerHTML = d.note;
+    }
+    function toggleCheck(cb) { cb.closest('.check-item').classList.toggle('done', cb.checked); saveChecks(); }
+    function saveChecks() {
+      const saved = {}; let done = 0; const all = document.querySelectorAll('.check-item input');
+      all.forEach(cb => { saved[cb.dataset.id] = cb.checked; if (cb.checked) done++; });
+      localStorage.setItem('ddokdi_helper_checks', JSON.stringify(saved));
+      document.getElementById('check-progress-text').textContent = `${done} / ${all.length} 완료`;
+      document.getElementById('check-progress-bar').style.width = `${(done / all.length) * 100}%`;
+    }
+    (function init() {
+      try {
+        const saved = JSON.parse(localStorage.getItem('ddokdi_helper_checks') || '{}');
+        document.querySelectorAll('.check-item input').forEach(cb => {
+          if (saved[cb.dataset.id]) { cb.checked = true; cb.closest('.check-item').classList.add('done'); }
+        });
+      } catch (e) {}
+      saveChecks(); render();
+    })();
+  </script>
+</body>
+</html>
