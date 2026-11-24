@@ -2,94 +2,31 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>친정엄마 산후도우미 30초 계산기 & 가이드 | 김똑디</title>
+  <meta name="description" content="2026 보건복지부 지침 기준 · 예상 급여와 정부지원금, 본인부담금을 30초 만에 계산해 보세요." />
+  <meta property="og:title" content="친정엄마 산후도우미 30초 계산기 &amp; 핵심 가이드 | 김똑디" />
+  <meta property="og:description" content="2026 보건복지부 지침 기준 · 예상 급여와 정부지원금, 본인부담금을 30초 만에 계산해 보세요." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kimddokdi.github.io/ddokdi-helper/" />
   <style>
     :root {
-      --bg: #fffaf6;
+      --bg: #f2f4f6;
       --card: #ffffff;
-      --primary: #e87a5d;
-      --primary-soft: #fff0eb;
-      --accent: #2f7d6d;
-      --accent-soft: #eaf5f2;
+      --primary: #3182f6;
+      --primary-soft: #e8f3ff;
+      --accent: #1b64da;
+      --accent-soft: #e8f3ff;
       --warn: #b45309;
       --warn-soft: #fef3c7;
-      --text: #222222;
-      --muted: #666666;
-      --border: #efe6df;
-      --radius: 18px;
-      --shadow: 0 4px 16px rgba(45, 30, 20, 0.04);
-      --result-bg: linear-gradient(135deg, #2f7d6d 0%, #236154 100%);
+      --text: #191f28;
+      --muted: #6b7684;
+      --border: #e5e8eb;
+      --radius: 20px;
+      --shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
+      --result-bg: linear-gradient(135deg, #3182f6 0%, #1b64da 100%);
       --result-text: #ffffff;
       --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
-    }
-
-    /* 1. 파스텔 살구 (기본) */
-    body[data-theme="1"] {
-      --bg: #fffaf6; --card: #ffffff; --primary: #e87a5d; --primary-soft: #fff0eb;
-      --accent: #2f7d6d; --accent-soft: #eaf5f2; --text: #222222; --muted: #666666;
-      --border: #efe6df; --radius: 18px; --result-bg: linear-gradient(135deg, #2f7d6d 0%, #236154 100%);
-    }
-    /* 2. 토스 클린 (화이트·블루) */
-    body[data-theme="2"] {
-      --bg: #f2f4f6; --card: #ffffff; --primary: #3182f6; --primary-soft: #e8f3ff;
-      --accent: #1b64da; --accent-soft: #e8f3ff; --text: #191f28; --muted: #6b7684;
-      --border: #e5e8eb; --radius: 20px; --shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
-      --result-bg: linear-gradient(135deg, #3182f6 0%, #1b64da 100%);
-    }
-    /* 3. 모던 에디토리얼 (아이보리·세리프) */
-    body[data-theme="3"] {
-      --bg: #f6f3ec; --card: #fffdf9; --primary: #6b4f3a; --primary-soft: #efe7dc;
-      --accent: #3d5a45; --accent-soft: #e6ede8; --text: #2b241d; --muted: #75685a;
-      --border: #dfd6c7; --radius: 8px; --shadow: none;
-      --result-bg: #2b241d;
-      --font: "Nanum Myeongjo", Georgia, serif;
-    }
-    /* 4. 민트 세이지 (자연주의) */
-    body[data-theme="4"] {
-      --bg: #f2f7f4; --card: #ffffff; --primary: #2d6a4f; --primary-soft: #d8f3dc;
-      --accent: #40916c; --accent-soft: #e9f5ee; --text: #1b4332; --muted: #52796f;
-      --border: #cfe4d7; --radius: 22px; --result-bg: linear-gradient(135deg, #40916c 0%, #2d6a4f 100%);
-    }
-    /* 5. 버터 옐로우 (포근한 아기방) */
-    body[data-theme="5"] {
-      --bg: #fffdf2; --card: #ffffff; --primary: #d97706; --primary-soft: #fef3c7;
-      --accent: #92400e; --accent-soft: #fde68a; --text: #451a03; --muted: #78350f;
-      --border: #f5e6b3; --radius: 24px; --result-bg: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-    }
-    /* 6. 다크 네온 테크 (11년차 개발자) */
-    body[data-theme="6"] {
-      --bg: #0f172a; --card: #1e293b; --primary: #10b981; --primary-soft: rgba(16, 185, 129, 0.16);
-      --accent: #34d399; --accent-soft: rgba(52, 211, 153, 0.16); --warn: #fbbf24; --warn-soft: rgba(251, 191, 36, 0.15);
-      --text: #f8fafc; --muted: #94a3b8; --border: #334155; --radius: 14px;
-      --shadow: 0 8px 24px rgba(0,0,0,0.3); --result-bg: linear-gradient(135deg, #059669 0%, #047857 100%);
-    }
-    /* 7. 라벤더 드림 (소프트 퍼플) */
-    body[data-theme="7"] {
-      --bg: #faf7ff; --card: #ffffff; --primary: #7c3aed; --primary-soft: #ede9fe;
-      --accent: #5b21b6; --accent-soft: #f3e8ff; --text: #2e1065; --muted: #6b5b95;
-      --border: #e9d5ff; --radius: 20px; --result-bg: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
-    }
-    /* 8. 노션 미니멀 (흑백 문서형) */
-    body[data-theme="8"] {
-      --bg: #ffffff; --card: #ffffff; --primary: #111111; --primary-soft: #f1f1ef;
-      --accent: #111111; --accent-soft: #f1f1ef; --text: #111111; --muted: #787774;
-      --border: #e3e2de; --radius: 8px; --shadow: none; --result-bg: #191919;
-    }
-    /* 9. 다꾸·픽셀 레트로 (볼드 보더) */
-    body[data-theme="9"] {
-      --bg: #fff3f8; --card: #ffffff; --primary: #ff4d8d; --primary-soft: #ffe0ec;
-      --accent: #00a896; --accent-soft: #d9f8f4; --text: #1a1a1a; --muted: #555555;
-      --border: #1a1a1a; --radius: 12px; --shadow: 4px 4px 0px #1a1a1a;
-      --result-bg: #ff4d8d;
-    }
-    /* 10. 글래스모피즘 (반투명 그라데이션) */
-    body[data-theme="10"] {
-      --bg: linear-gradient(160deg, #ffe4e6 0%, #e0e7ff 50%, #dcfce7 100%);
-      --card: rgba(255, 255, 255, 0.72); --primary: #ec4899; --primary-soft: rgba(236, 72, 153, 0.14);
-      --accent: #6366f1; --accent-soft: rgba(99, 102, 241, 0.14); --text: #1e1b4b; --muted: #4b5563;
-      --border: rgba(255, 255, 255, 0.8); --radius: 22px; --shadow: 0 8px 30px rgba(31, 38, 135, 0.08);
-      --result-bg: linear-gradient(135deg, #ec4899 0%, #6366f1 100%);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -97,61 +34,12 @@
       margin: 0;
       font-family: var(--font);
       background: var(--bg);
-      background-attachment: fixed;
       color: var(--text);
       line-height: 1.55;
       padding-bottom: 56px;
-      transition: background 0.25s, color 0.2s;
     }
 
-    /* 테마 스위처 바 */
-    .theme-bar {
-      position: sticky;
-      top: 0;
-      z-index: 30;
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
-      padding: 10px 12px;
-    }
-    body[data-theme="6"] .theme-bar {
-      background: rgba(15, 23, 42, 0.9);
-      border-bottom-color: #334155;
-    }
-    .theme-bar-title {
-      font-size: 11.5px;
-      font-weight: 700;
-      color: var(--muted);
-      margin: 0 0 6px;
-      display: flex;
-      justify-content: space-between;
-    }
-    .theme-scroll {
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding-bottom: 2px;
-      scrollbar-width: none;
-    }
-    .theme-scroll::-webkit-scrollbar { display: none; }
-    .theme-chip {
-      flex-shrink: 0;
-      border: 1.5px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 11px;
-      border-radius: 999px;
-      cursor: pointer;
-    }
-    .theme-chip.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: #fff;
-    }
-
-    .wrap { max-width: 480px; margin: 0 auto; padding: 18px 16px; }
+    .wrap { max-width: 480px; margin: 0 auto; padding: 24px 16px 18px; }
     .brand {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--primary-soft); color: var(--primary);
@@ -173,15 +61,14 @@
     }
     .tab-btn.active {
       background: var(--card); color: var(--text);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
     }
     .section { display: none; }
     .section.active { display: block; }
 
     .card {
       background: var(--card);
-      backdrop-filter: blur(12px);
-      border: 1.5px solid var(--border);
+      border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 18px;
       margin-bottom: 14px;
@@ -213,9 +100,8 @@
       border-radius: var(--radius);
       padding: 20px 18px;
       margin-bottom: 14px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 6px 18px rgba(49, 130, 246, 0.18);
     }
-    body[data-theme="9"] .result-box { border: 2px solid #1a1a1a; }
     .result-badge {
       display: inline-block; background: rgba(255,255,255,0.2);
       font-size: 11.5px; font-weight: 700; padding: 4px 10px; border-radius: 999px; margin-bottom: 10px;
@@ -232,9 +118,9 @@
 
     .note-box {
       background: var(--warn-soft); color: var(--warn);
-      border-radius: calc(var(--radius) * 0.8); padding: 13px 14px; font-size: 12.5px; margin-top: 10px;
+      border-radius: calc(var(--radius) * 0.8); padding: 13px 14px;
+      font-size: 12.5px; line-height: 1.6;
     }
-    body[data-theme="6"] .note-box { color: #fde68a; }
 
     .info-card h3 { margin: 0 0 8px; font-size: 15.5px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
     .info-card p, .info-card li { font-size: 13.5px; color: var(--text); opacity: 0.9; margin: 0 0 6px; }
@@ -245,44 +131,40 @@
     }
     .pill.warn { background: var(--warn-soft); color: var(--warn); }
 
+    a.inline {
+      color: var(--primary); font-weight: 700; text-decoration: underline;
+      text-decoration-color: rgba(49, 130, 246, 0.35); text-underline-offset: 2px;
+    }
+
+    .quick-links { display: grid; gap: 8px; margin-top: 12px; }
+    .quick-link {
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
+      padding: 13px 14px; border-radius: calc(var(--radius) * 0.7);
+      background: var(--primary-soft); color: var(--primary);
+      text-decoration: none; font-size: 13.5px; font-weight: 700;
+    }
+    .quick-link .arrow { font-size: 13px; opacity: 0.65; font-weight: 400; }
+
     .progress-wrap { background: var(--border); height: 8px; border-radius: 999px; overflow: hidden; margin: 8px 0 14px; }
     .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.2s; }
     .check-item {
       display: flex; align-items: flex-start; gap: 10px; padding: 12px 0;
-      border-bottom: 1px solid var(--border); cursor: pointer;
+      border-bottom: 1px solid var(--border);
     }
     .check-item:last-child { border-bottom: none; }
     .check-item input { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
+    .check-text { flex: 1; }
+    .check-text label { display: block; cursor: pointer; }
     .check-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
     .check-text span { display: block; font-size: 12.5px; color: var(--muted); }
     .check-item.done .check-text strong { text-decoration: line-through; opacity: 0.5; }
-    .footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 22px; padding: 0 8px; }
+    .footer { text-align: center; font-size: 12px; color: var(--muted); margin-top: 22px; padding: 0 8px; line-height: 1.7; }
   </style>
 </head>
-<body data-theme="1">
-  <!-- 10가지 디자인 비교용 스위처 -->
-  <div class="theme-bar">
-    <div class="theme-bar-title">
-      <span>🎨 디자인 10종 미리보기</span>
-      <span id="theme-name">1. 파스텔 살구</span>
-    </div>
-    <div class="theme-scroll">
-      <button class="theme-chip active" onclick="setTheme(1, '1. 파스텔 살구', this)">1. 파스텔 살구</button>
-      <button class="theme-chip" onclick="setTheme(2, '2. 토스 클린', this)">2. 토스 클린</button>
-      <button class="theme-chip" onclick="setTheme(3, '3. 에디토리얼', this)">3. 에디토리얼</button>
-      <button class="theme-chip" onclick="setTheme(4, '4. 민트 세이지', this)">4. 민트 세이지</button>
-      <button class="theme-chip" onclick="setTheme(5, '5. 버터 옐로우', this)">5. 버터 옐로우</button>
-      <button class="theme-chip" onclick="setTheme(6, '6. 다크 개발자', this)">6. 다크 개발자</button>
-      <button class="theme-chip" onclick="setTheme(7, '7. 라벤더 드림', this)">7. 라벤더 드림</button>
-      <button class="theme-chip" onclick="setTheme(8, '8. 노션 미니멀', this)">8. 노션 미니멀</button>
-      <button class="theme-chip" onclick="setTheme(9, '9. 다꾸 레트로', this)">9. 다꾸 레트로</button>
-      <button class="theme-chip" onclick="setTheme(10, '10. 글래스 파스텔', this)">10. 글래스 파스텔</button>
-    </div>
-  </div>
-
+<body>
   <div class="wrap">
     <div class="brand">👶 @ddokdi.kim · 김똑디 출산준비</div>
-    <h1>친정엄마 산후도우미<br/>30초 계산기 & 핵심 가이드</h1>
+    <h1>친정엄마 산후도우미<br/>30초 계산기 &amp; 핵심 가이드</h1>
     <p class="subtitle">2026년 보건복지부 「산모·신생아 건강관리 지원사업」 지침 기준으로 정리했어요.</p>
 
     <div class="tabs">
@@ -368,7 +250,7 @@
       </div>
       <div class="card info-card">
         <h3>2. 엄마가 준비할 것: 60시간 교육 + 기관 등록</h3>
-        <p>민간 자격증이 아니라 <strong>시·도 지정 교육기관</strong> 수료가 필수예요.</p>
+        <p>민간 자격증이 아니라 <strong>시·도 지정 교육기관</strong> 수료가 필수예요. 지정 기관 목록은 <a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처</a>에서 확인할 수 있어요.</p>
         <ul>
           <li><strong>신규 60시간</strong> (이론 28h + 실기 32h) / <strong>경력 40시간</strong> (요양보호사·간호사 등)</li>
           <li>교육비 자부담 (기관별 상이, 서울 기준 약 20~25만 원대)</li>
@@ -376,9 +258,9 @@
         </ul>
       </div>
       <div class="card info-card">
-        <h3>3. 산모 신청 기간 & 바우처 유효기간</h3>
+        <h3>3. 산모 신청 기간 &amp; 바우처 유효기간</h3>
         <ul>
-          <li><strong>신청 기간:</strong> 출산예정일 <strong>40일 전 ~ 출산일로부터 60일 이내</strong> (복지로·정부24·보건소)</li>
+          <li><strong>신청 기간:</strong> 출산예정일 <strong>40일 전 ~ 출산일로부터 60일 이내</strong> (<a class="inline" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로</a>·<a class="inline" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24</a>·보건소)</li>
           <li><strong>유효기간:</strong> 출산일로부터 <strong>90일 이내</strong> (미숙아 입원 시 퇴원일 기준 예외)</li>
           <li><strong>소득 기준:</strong> 기준중위소득 150% 이하 (초과 가구는 지자체별 예외지원 확인)</li>
         </ul>
@@ -390,6 +272,15 @@
           <li><strong>첫만남이용권 결제:</strong> 제공기관 가맹 여부·결제 방식마다 달라서 사전에 기관에 꼭 문의하세요.</li>
         </ul>
       </div>
+      <div class="card info-card">
+        <h3>🔗 바로 신청·확인하기</h3>
+        <p>신청과 교육기관 조회는 아래에서 바로 할 수 있어요.</p>
+        <div class="quick-links">
+          <a class="quick-link" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로 · 온라인 신청<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24 · 신청·민원<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 기관 조회<span class="arrow">↗</span></a>
+        </div>
+      </div>
     </div>
 
     <div id="tab-check" class="section">
@@ -399,12 +290,56 @@
           <span id="check-progress-text" style="color: var(--accent);">0 / 6 완료</span>
         </div>
         <div class="progress-wrap"><div class="progress-bar" id="check-progress-bar"></div></div>
-        <label class="check-item"><input type="checkbox" data-id="c1" onchange="toggleCheck(this)" /><div class="check-text"><strong>1. 관할 보건소에서 우리 지역 예외지원·인정가족 여부 확인</strong><span>건보료 150% 초과 예외지원 및 지역별 추가 지원금 확인</span></div></label>
-        <label class="check-item"><input type="checkbox" data-id="c2" onchange="toggleCheck(this)" /><div class="check-text"><strong>2. 어머님 시·도 지정 교육기관 등록 & 60시간(경력 40시간) 이수</strong><span>전자바우처 교육관리시스템 수료증 발급 확인</span></div></label>
-        <label class="check-item"><input type="checkbox" data-id="c3" onchange="toggleCheck(this)" /><div class="check-text"><strong>3. 산모·신생아 건강관리 제공기관(업체)에 어머님 소속 등록</strong><span>가족 매칭 가능 여부와 급여 정산 비율(75%↑) 사전 확인</span></div></label>
-        <label class="check-item"><input type="checkbox" data-id="c4" onchange="toggleCheck(this)" /><div class="check-text"><strong>4. 출산예정 40일 전 ~ 출산 후 60일 이내 바우처 신청</strong><span>복지로 또는 관할 보건소 방문 신청</span></div></label>
-        <label class="check-item"><input type="checkbox" data-id="c5" onchange="toggleCheck(this)" /><div class="check-text"><strong>5. 제공기관에 '가족관계' 명시 후 지정 배정</strong><span>시스템상 일반(가족) 또는 인정(가족) 등록 여부 꼭 체크</span></div></label>
-        <label class="check-item"><input type="checkbox" data-id="c6" onchange="toggleCheck(this)" /><div class="check-text"><strong>6. 본인부담금 결제 수단(첫만남이용권 가능 여부 등) 확인</strong><span>출산 후 90일 이내 서비스 개시하기</span></div></label>
+        <div class="check-item">
+          <input type="checkbox" id="c1" data-id="c1" onchange="toggleCheck(this)" />
+          <div class="check-text">
+            <label for="c1"><strong>1. 관할 보건소에서 우리 지역 예외지원·인정가족 여부 확인</strong></label>
+            <span>건보료 150% 초과 예외지원 및 지역별 추가 지원금 확인</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c2" data-id="c2" onchange="toggleCheck(this)" />
+          <div class="check-text">
+            <label for="c2"><strong>2. 어머님 시·도 지정 교육기관 등록 &amp; 60시간(경력 40시간) 이수</strong></label>
+            <span><a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">전자바우처 교육관리시스템</a> 수료증 발급 확인</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c3" data-id="c3" onchange="toggleCheck(this)" />
+          <div class="check-text">
+            <label for="c3"><strong>3. 산모·신생아 건강관리 제공기관(업체)에 어머님 소속 등록</strong></label>
+            <span>가족 매칭 가능 여부와 급여 정산 비율(75%↑) 사전 확인</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c4" data-id="c4" onchange="toggleCheck(this)" />
+          <div class="check-text">
+            <label for="c4"><strong>4. 출산예정 40일 전 ~ 출산 후 60일 이내 바우처 신청</strong></label>
+            <span><a class="inline" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로</a>·<a class="inline" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24</a> 또는 관할 보건소 방문 신청</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c5" data-id="c5" onchange="toggleCheck(this)" />
+          <div class="check-text">
+            <label for="c5"><strong>5. 제공기관에 '가족관계' 명시 후 지정 배정</strong></label>
+            <span>시스템상 일반(가족) 또는 인정(가족) 등록 여부 꼭 체크</span>
+          </div>
+        </div>
+        <div class="check-item">
+          <input type="checkbox" id="c6" data-id="c6" onchange="toggleCheck(this)" />
+          <div class="check-text">
+            <label for="c6"><strong>6. 본인부담금 결제 수단(첫만남이용권 가능 여부 등) 확인</strong></label>
+            <span>출산 후 90일 이내 서비스 개시하기</span>
+          </div>
+        </div>
+      </div>
+      <div class="card info-card">
+        <h3>🔗 신청·확인 바로가기</h3>
+        <div class="quick-links">
+          <a class="quick-link" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로 · 온라인 신청<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24 · 신청·민원<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 기관 조회<span class="arrow">↗</span></a>
+        </div>
       </div>
     </div>
 
@@ -430,12 +365,6 @@
     };
     const fmt = (n) => Math.round(n).toLocaleString('ko-KR') + '원';
 
-    function setTheme(num, name, btn) {
-      document.body.setAttribute('data-theme', num);
-      document.getElementById('theme-name').textContent = name;
-      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
-      btn.classList.add('active');
-    }
     function switchTab(tab, btn) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
