@@ -179,7 +179,7 @@
         <div class="choices cols-2">
           <button class="choice selected" data-group="path" data-val="A" onclick="selectOpt(this)">
             <span class="choice-title">교육 이수 (일반)</span>
-            <span class="choice-desc">60시간 교육 + 기관 등록<br/>지역 제한·감산 없음</span>
+            <span class="choice-desc">60시간(경력자 40시간) + 기관 등록<br/>지역 제한·감산 없음</span>
           </button>
           <button class="choice" data-group="path" data-val="B" onclick="selectOpt(this)">
             <span class="choice-title">예외 인정 (가족)</span>
@@ -249,13 +249,15 @@
         </ul>
       </div>
       <div class="card info-card">
-        <h3>2. 엄마가 준비할 것: 60시간 교육 + 기관 등록</h3>
+        <h3>2. 엄마가 준비할 것: 60시간 교육 + 기관 등록 <span class="pill">경력자는 40시간</span></h3>
         <p>민간 자격증이 아니라 <strong>시·도 지정 교육기관</strong> 수료가 필수예요. 지정 기관 목록은 <a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처</a>에서 확인할 수 있어요.</p>
         <ul>
-          <li><strong>신규 60시간</strong> (이론 28h + 실기 32h) / <strong>경력 40시간</strong> (요양보호사·간호사 등)</li>
-          <li>교육비 자부담 (기관별 상이, 서울 기준 약 20~25만 원대)</li>
+          <li><strong>신규자 60시간</strong> (이론 28h + 실기 32h) · 교육비 약 <strong>20~25만 원</strong></li>
+          <li><strong>경력자 40시간</strong> (이론 15h + 실기 25h) · 교육비 약 <strong>16~20만 원 내외</strong><br/><span style="font-size:12.5px; color:var(--muted);">요양보호사·간호사·간호조무사·사회복지사 자격(면허) 소지자가 대상이에요. 60시간을 다 듣지 않아도 됩니다.</span></li>
+          <li>교육비는 기관이 자율 책정 (지침 권장액 신규 25만 / 경력 20만 원, 실제 센터는 신규 20만·경력 16만 원 모집도 흔해요)</li>
           <li>수료 후 반드시 <strong>제공기관(업체) 소속 등록</strong> 후 산모와 매칭해야 지원금 지급</li>
         </ul>
+        <p style="margin-top:8px;">💡 <strong>교육비 환급 팁</strong>: 수료 후 2년 이내에 이 사업 제공인력으로 <strong>100일(800시간) 이상</strong> 활동하고 신청일 현재 재직 중이면 교육비를 지원받아요(신규 25만 / 경력 20만, 1인 1회). 다만 우리 아기 <strong>10일(80시간)</strong>만 돌보는 경우는 해당되지 않아요.</p>
       </div>
       <div class="card info-card">
         <h3>3. 산모 신청 기간 &amp; 바우처 유효기간</h3>
@@ -300,8 +302,8 @@
         <div class="check-item">
           <input type="checkbox" id="c2" data-id="c2" onchange="toggleCheck(this)" />
           <div class="check-text">
-            <label for="c2"><strong>2. 어머님 시·도 지정 교육기관 등록 &amp; 60시간(경력 40시간) 이수</strong></label>
-            <span><a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">전자바우처 교육관리시스템</a> 수료증 발급 확인</span>
+            <label for="c2"><strong>2. 어머님 시·도 지정 교육기관 등록 &amp; 교육 이수</strong></label>
+            <span>신규 60시간(약 20~25만 원) / 요양보호사·간호사·간호조무사·사회복지사는 경력자 40시간(약 16~20만 원 내외)<br/><a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">전자바우처 교육관리시스템</a> 수료증 발급 확인</span>
           </div>
         </div>
         <div class="check-item">
@@ -353,14 +355,24 @@
     const state = { path: 'A', income: 'ga', days: 10 };
     const DATA = {
       A: {
-        label: '길 A · 일반(가족) · 감산 없음', total10: 1464000,
-        gov10: { ga: 1165000, tong: 1002000, la: 764000 },
-        note: '💡 <strong>일반(가족)</strong>은 교육 이수+제공기관 등록 기준이며 감산이 없습니다. (표준 10일은 2026 지침 공식 금액표 기준, 5일·15일은 일할 비례 참고치입니다.)'
+        label: '길 A · 일반(가족) · 감산 없음',
+        total: { 5: 732000, 10: 1464000, 15: 2196000 },
+        gov: {
+          ga:   { 5: 659000, 10: 1165000, 15: 1525000 },
+          tong: { 5: 569000, 10: 1002000, 15: 1303000 },
+          la:   { 5: 456000, 10: 764000, 15: 1035000 }
+        },
+        note: '💡 <strong>일반(가족)</strong>은 교육 이수 + 제공기관 등록 기준이며 감산이 없습니다. 금액은 2026 지침 서비스가격표(단태아 첫째아, 5·10·15일) 기준입니다.'
       },
       B: {
-        label: '길 B · 인정(가족) · 50% 감산', total10: 676000,
-        gov10: { ga: 541000, tong: 466000, la: 350000 },
-        note: '⚠️ <strong>인정(가족)</strong>은 교육 없이 섬·벽지·분만취약지 등 지자체 예외 인정 시에만 가능하며, 산모와 같은 시·군·구 거주 필수 및 50% 감산됩니다.'
+        label: '길 B · 인정(가족) · 50% 감산',
+        total: { 5: 329500, 10: 659000, 15: 988000 },
+        gov: {
+          ga:   { 5: 296500, 10: 524500, 15: 686500 },
+          tong: { 5: 256000, 10: 451000, 15: 586000 },
+          la:   { 5: 205500, 10: 343500, 15: 466000 }
+        },
+        note: '⚠️ <strong>인정(가족)</strong>은 교육 없이 섬·벽지·분만취약지 등 지자체 예외 인정 시에만 가능하며, 산모와 같은 시·군·구 거주 필수 + 서비스가격·정부지원금 각 50% 감산입니다. (지침 원문 표는 천원 단위로 반올림해 표기되어 500원 단위 차이가 날 수 있어요.)'
       }
     };
     const fmt = (n) => Math.round(n).toLocaleString('ko-KR') + '원';
@@ -379,8 +391,8 @@
       render();
     }
     function render() {
-      const d = DATA[state.path], ratio = state.days / 10;
-      const total = d.total10 * ratio, gov = d.gov10[state.income] * ratio, self = total - gov, wage = total * 0.75;
+      const d = DATA[state.path], day = state.days;
+      const total = d.total[day], gov = d.gov[state.income][day], self = total - gov, wage = total * 0.75;
       document.getElementById('res-badge').textContent = d.label;
       document.getElementById('res-wage').textContent = '최소 ' + fmt(wage);
       document.getElementById('res-daily').textContent = `하루 약 ${fmt(wage / state.days)} 수준 (주 5일·일 9시간 원칙)`;
