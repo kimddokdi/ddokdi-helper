@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>친정엄마 산후도우미 30초 계산기 & 가이드 | 김똑디</title>
+  <title>친정엄마 산후도우미 30초 계산기 &amp; 가이드 | 김똑디</title>
   <meta name="description" content="2026 보건복지부 지침 기준 · 예상 급여와 정부지원금, 본인부담금을 30초 만에 계산해 보세요." />
   <meta property="og:title" content="친정엄마 산후도우미 30초 계산기 &amp; 핵심 가이드 | 김똑디" />
   <meta property="og:description" content="2026 보건복지부 지침 기준 · 예상 급여와 정부지원금, 본인부담금을 30초 만에 계산해 보세요." />
@@ -50,18 +50,18 @@
     .subtitle { font-size: 13.5px; color: var(--muted); margin: 0 0 18px; }
 
     .tabs {
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
       background: var(--primary-soft); padding: 5px; border-radius: calc(var(--radius) * 0.8);
       margin-bottom: 18px;
     }
     .tab-btn {
-      border: none; background: transparent; padding: 9px 3px;
-      border-radius: calc(var(--radius) * 0.6); font-size: 12px; font-weight: 700;
+      border: none; background: transparent; padding: 10px 4px;
+      border-radius: calc(var(--radius) * 0.6); font-size: 12.5px; font-weight: 700;
       color: var(--muted); cursor: pointer; font-family: inherit;
       letter-spacing: -0.02em; white-space: nowrap;
     }
     @media (max-width: 430px) {
-      .tab-btn { font-size: 11.5px; padding: 9px 2px; }
+      .tab-btn { font-size: 12px; padding: 10px 2px; }
       .tab-btn .tab-em { display: none; }
     }
     @media (max-width: 360px) {
@@ -164,19 +164,10 @@
     }
     .quick-link .arrow { font-size: 13px; opacity: 0.65; font-weight: 400; }
 
-    .progress-wrap { background: var(--border); height: 8px; border-radius: 999px; overflow: hidden; margin: 8px 0 14px; }
-    .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.2s; }
-    .check-item {
-      display: flex; align-items: flex-start; gap: 10px; padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .check-item:last-child { border-bottom: none; }
-    .check-item input { width: 19px; height: 19px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; }
-    .check-text { flex: 1; }
-    .check-text label { display: block; cursor: pointer; }
-    .check-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
-    .check-text span { display: block; font-size: 12.5px; color: var(--muted); }
-    .check-item.done .check-text strong { text-decoration: line-through; opacity: 0.5; }
+    .progress-wrap { background: var(--border); height: 8px; border-radius: 999px; overflow: hidden; margin: 8px 0 8px; }
+    .progress-bar { height: 100%; background: var(--accent); width: 0%; transition: width 0.25s; }
+    .progress-note { font-size: 11.5px; color: var(--muted); margin: 0; line-height: 1.55; }
+    .progress-note.done { color: var(--accent); font-weight: 700; }
 
     /* 예정일 타임라인 */
     .date-input {
@@ -229,6 +220,24 @@
     .tl-desc strong { color: var(--text); }
     .tl-item.now .tl-desc { color: #3d4a5c; }
     .tl-item.now .tl-desc strong { color: var(--accent); }
+
+    .tl-check {
+      display: flex; align-items: flex-start; gap: 9px; margin-top: 10px;
+      padding: 11px 12px; border-radius: 13px; background: var(--bg);
+      border: 1.5px solid transparent; cursor: pointer;
+    }
+    .tl-check input {
+      width: 18px; height: 18px; margin: 1px 0 0; flex-shrink: 0; accent-color: var(--accent);
+    }
+    .tl-check .ck { flex: 1; min-width: 0; }
+    .tl-check .ck b { display: block; font-size: 12.8px; font-weight: 700; line-height: 1.45; color: var(--text); }
+    .tl-check .ck small { display: block; font-size: 11.5px; color: var(--muted); line-height: 1.5; margin-top: 2px; }
+    .tl-item.now .tl-check { background: var(--card); }
+    .tl-item.done .tl-check { background: var(--primary-soft); }
+    .tl-item.done .tl-check .ck b { text-decoration: line-through; opacity: 0.55; }
+    .tl-item.done .tl-node { border-color: var(--primary); background: var(--primary); color: #fff; font-size: 0; }
+    .tl-item.done .tl-node::after { content: "✓"; font-size: 11px; }
+
     .tip-box {
       background: var(--primary-soft); color: var(--accent);
       border-radius: calc(var(--radius) * 0.8); padding: 13px 14px;
@@ -248,8 +257,7 @@
     <div class="tabs">
       <button class="tab-btn active" onclick="switchTab('calc', this)"><span class="tab-em">🧮 </span>30초 계산기</button>
       <button class="tab-btn" onclick="switchTab('info', this)"><span class="tab-em">📌 </span>핵심 정리</button>
-      <button class="tab-btn" onclick="switchTab('check', this)"><span class="tab-em">✅ </span>체크리스트</button>
-      <button class="tab-btn" onclick="switchTab('timeline', this)" title="예정일 타임라인"><span class="tab-em">📅 </span>타임라인</button>
+      <button class="tab-btn" onclick="switchTab('timeline', this)" title="예정일 타임라인 · 체크리스트"><span class="tab-em">🗓 </span>준비 타임라인</button>
     </div>
 
     <div id="tab-calc" class="section active">
@@ -372,7 +380,7 @@
       </div>
       <div class="card info-card">
         <h3>2. 엄마가 준비할 것: 60시간 교육 + 기관 등록 <span class="pill">경력자는 40시간</span></h3>
-        <p>민간 자격증이 아니라 <strong>시·도 지정 교육기관</strong> 수료가 필수예요. 지정 기관 목록은 <a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처</a>에서 확인할 수 있어요.</p>
+        <p>민간 자격증이 아니라 <strong>시·도 지정 교육기관</strong> 수료가 필수예요. 지정 기관 목록은 <a class="inline" href="https://www.socialservice.or.kr:444/user/svcsrch/eclst/eclstList.do" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 산모신생아 교육기관 검색</a>에서 확인할 수 있어요.</p>
         <ul>
           <li><strong>신규자 60시간</strong> (이론 28h + 실기 32h) · 교육비 약 <strong>20~25만 원</strong></li>
           <li><strong>경력자 40시간</strong> (이론 15h + 실기 25h) · 교육비 약 <strong>16~20만 원 내외</strong><br/><span style="font-size:12.5px; color:var(--muted);">요양보호사·간호사·간호조무사·사회복지사 자격(면허) 소지자가 대상이에요. 60시간을 다 듣지 않아도 됩니다.</span></li>
@@ -408,71 +416,12 @@
       </div>
       <div class="card info-card">
         <h3>🔗 바로 신청·확인하기</h3>
-        <p>신청과 교육기관 조회는 아래에서 바로 할 수 있어요.</p>
+        <p>신청과 교육기관·제공기관 조회는 아래에서 바로 할 수 있어요.</p>
         <div class="quick-links">
           <a class="quick-link" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로 · 온라인 신청<span class="arrow">↗</span></a>
           <a class="quick-link" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24 · 신청·민원<span class="arrow">↗</span></a>
-          <a class="quick-link" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 기관 조회<span class="arrow">↗</span></a>
-        </div>
-      </div>
-    </div>
-
-    <div id="tab-check" class="section">
-      <div class="card">
-        <div class="label" style="justify-content: space-between; margin-bottom: 4px;">
-          <span>준비 진행률</span>
-          <span id="check-progress-text" style="color: var(--accent);">0 / 6 완료</span>
-        </div>
-        <div class="progress-wrap"><div class="progress-bar" id="check-progress-bar"></div></div>
-        <div class="check-item">
-          <input type="checkbox" id="c1" data-id="c1" onchange="toggleCheck(this)" />
-          <div class="check-text">
-            <label for="c1"><strong>1. 관할 보건소에서 우리 지역 예외지원·인정가족 여부 확인</strong></label>
-            <span>건보료 150% 초과 예외지원 및 지역별 추가 지원금 확인</span>
-          </div>
-        </div>
-        <div class="check-item">
-          <input type="checkbox" id="c2" data-id="c2" onchange="toggleCheck(this)" />
-          <div class="check-text">
-            <label for="c2"><strong>2. 어머님 시·도 지정 교육기관 등록 &amp; 교육 이수</strong></label>
-            <span>신규 60시간(약 20~25만 원) / 요양보호사·간호사·간호조무사·사회복지사는 경력자 40시간(약 16~20만 원 내외)<br/><a class="inline" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">전자바우처 교육관리시스템</a> 수료증 발급 확인</span>
-          </div>
-        </div>
-        <div class="check-item">
-          <input type="checkbox" id="c3" data-id="c3" onchange="toggleCheck(this)" />
-          <div class="check-text">
-            <label for="c3"><strong>3. 산모·신생아 건강관리 제공기관(업체)에 어머님 소속 등록</strong></label>
-            <span>가족 매칭 가능 여부 + 기관 수수료율(10~25%)·4대보험 공제 여부 확인</span>
-          </div>
-        </div>
-        <div class="check-item">
-          <input type="checkbox" id="c4" data-id="c4" onchange="toggleCheck(this)" />
-          <div class="check-text">
-            <label for="c4"><strong>4. 출산예정 40일 전 ~ 출산 후 60일 이내 바우처 신청</strong></label>
-            <span><a class="inline" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로</a>·<a class="inline" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24</a> 또는 관할 보건소 방문 신청</span>
-          </div>
-        </div>
-        <div class="check-item">
-          <input type="checkbox" id="c5" data-id="c5" onchange="toggleCheck(this)" />
-          <div class="check-text">
-            <label for="c5"><strong>5. 제공기관에 '가족관계' 명시 후 지정 배정</strong></label>
-            <span>시스템상 일반(가족) 또는 인정(가족) 등록 여부 꼭 체크</span>
-          </div>
-        </div>
-        <div class="check-item">
-          <input type="checkbox" id="c6" data-id="c6" onchange="toggleCheck(this)" />
-          <div class="check-text">
-            <label for="c6"><strong>6. 본인부담금 결제 수단(첫만남이용권 가능 여부 등) 확인</strong></label>
-            <span>출산 후 90일 이내 서비스 개시하기</span>
-          </div>
-        </div>
-      </div>
-      <div class="card info-card">
-        <h3>🔗 신청·확인 바로가기</h3>
-        <div class="quick-links">
-          <a class="quick-link" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로 · 온라인 신청<span class="arrow">↗</span></a>
-          <a class="quick-link" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24 · 신청·민원<span class="arrow">↗</span></a>
-          <a class="quick-link" href="https://www.socialservice.or.kr" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 기관 조회<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.socialservice.or.kr:444/user/svcsrch/supply/supplyList.do" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 제공기관 검색<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.socialservice.or.kr:444/user/svcsrch/eclst/eclstList.do" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 교육기관 검색<span class="arrow">↗</span></a>
         </div>
       </div>
     </div>
@@ -481,7 +430,7 @@
       <div class="card">
         <div class="label">📅 출산예정일</div>
         <input type="date" id="tl-edd" class="date-input" aria-label="출산예정일" min="2020-01-01" max="2100-12-31" onchange="setEdd(this.value)" />
-        <p class="date-hint">예정일을 바꾸면 타임라인이 바로 다시 계산돼요. 처음 보이는 날짜는 예시예요.</p>
+        <p class="date-hint">예정일을 바꾸면 타임라인과 D-day가 바로 다시 계산돼요. 처음 보이는 날짜는 예시예요.</p>
         <div class="label" style="margin-top:16px;">어머님 자격 구분</div>
         <div class="choices cols-2">
           <button class="choice selected" data-edu="new" onclick="setEdu(this)">
@@ -495,6 +444,16 @@
         </div>
       </div>
       <div id="tl-content"></div>
+
+      <div class="card info-card">
+        <h3>🔗 신청·확인 바로가기</h3>
+        <div class="quick-links">
+          <a class="quick-link" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로 · 온라인 신청<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24 · 신청·민원<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.socialservice.or.kr:444/user/svcsrch/supply/supplyList.do" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 제공기관 검색<span class="arrow">↗</span></a>
+          <a class="quick-link" href="https://www.socialservice.or.kr:444/user/svcsrch/eclst/eclstList.do" target="_blank" rel="noopener noreferrer">사회서비스 전자바우처 · 교육기관 검색<span class="arrow">↗</span></a>
+        </div>
+      </div>
     </div>
 
     <div class="footer">
@@ -559,27 +518,61 @@
         : `세전 ${fmt(wage)}에서 기관 수수료 ${state.fee}%만 공제 (4대보험·원천징수 없음 기준)`;
       document.getElementById('res-note').innerHTML = d.note;
     }
-    function toggleCheck(cb) { cb.closest('.check-item').classList.toggle('done', cb.checked); saveChecks(); }
-    function saveChecks() {
-      const saved = {}; let done = 0; const all = document.querySelectorAll('.check-item input');
-      all.forEach(cb => { saved[cb.dataset.id] = cb.checked; if (cb.checked) done++; });
-      localStorage.setItem('ddokdi_helper_checks', JSON.stringify(saved));
-      document.getElementById('check-progress-text').textContent = `${done} / ${all.length} 완료`;
-      document.getElementById('check-progress-bar').style.width = `${(done / all.length) * 100}%`;
+
+    /* ───────── 준비 체크 · 진행률 (타임라인 단계와 연동) ───────── */
+    function readChecks() {
+      try { return JSON.parse(localStorage.getItem('ddokdi_helper_checks') || '{}') || {}; }
+      catch (e) { return {}; }
     }
-    (function init() {
-      try {
-        const saved = JSON.parse(localStorage.getItem('ddokdi_helper_checks') || '{}');
-        document.querySelectorAll('.check-item input').forEach(cb => {
-          if (saved[cb.dataset.id]) { cb.checked = true; cb.closest('.check-item').classList.add('done'); }
-        });
-      } catch (e) {}
-      saveChecks(); render();
-    })();
+    function writeChecks(saved) {
+      try { localStorage.setItem('ddokdi_helper_checks', JSON.stringify(saved)); } catch (e) {}
+    }
+    function stepBoxes() { return document.querySelectorAll('#tab-timeline input[type="checkbox"][data-id]'); }
+    function updateProgress() {
+      const boxes = stepBoxes();
+      let done = 0;
+      boxes.forEach(cb => { if (cb.checked) done++; });
+      const total = boxes.length;
+      const text = document.getElementById('check-progress-text');
+      const bar = document.getElementById('check-progress-bar');
+      const note = document.getElementById('check-progress-note');
+      if (text) text.textContent = `${done} / ${total} 완료`;
+      if (bar) bar.style.width = total ? `${(done / total) * 100}%` : '0%';
+      if (note) {
+        const allDone = total > 0 && done === total;
+        note.classList.toggle('done', allDone);
+        note.textContent = allDone
+          ? '모든 준비를 마쳤어요 🎉 이제 출산만 기다리면 돼요.'
+          : done === 0
+            ? '단계별 체크박스를 누르면 진행률이 이 브라우저에 저장돼요.'
+            : '체크한 단계는 저장돼요. 남은 단계만 확인하면 돼요.';
+      }
+    }
+    function syncChecks() {
+      const saved = readChecks();
+      stepBoxes().forEach(cb => {
+        const on = !!saved[cb.dataset.id];
+        cb.checked = on;
+        const item = cb.closest('.tl-item');
+        if (item) item.classList.toggle('done', on);
+      });
+      updateProgress();
+    }
+    function toggleCheck(cb) {
+      const saved = readChecks();
+      saved[cb.dataset.id] = cb.checked;
+      writeChecks(saved);
+      const item = cb.closest('.tl-item');
+      if (item) item.classList.toggle('done', cb.checked);
+      updateProgress();
+    }
+    render();
 
     /* ───────── 예정일 타임라인 ───────── */
     const TL_WD = ['일', '월', '화', '수', '목', '금', '토'];
     const tlState = { edd: null, edu: 'new' };
+    const TL_EDU_URL = 'https://www.socialservice.or.kr:444/user/svcsrch/eclst/eclstList.do';
+    const TL_SUPPLY_URL = 'https://www.socialservice.or.kr:444/user/svcsrch/supply/supplyList.do';
 
     const tlToday = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
     const tlAdd = (d, n) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() + n); return x; };
@@ -631,7 +624,7 @@
       if (!wrap) return;
       const edd = tlState.edd;
       if (!edd) {
-        wrap.innerHTML = '<div class="tip-box">출산예정일을 입력하면 교육부터 바우처 마감까지 준비 타임라인이 만들어져요.</div>';
+        wrap.innerHTML = '<div class="tip-box">출산예정일을 입력하면 교육부터 서비스 이용 마감까지 한 흐름의 준비 타임라인이 만들어져요.</div>';
         return;
       }
 
@@ -645,70 +638,98 @@
 
       let now = 1;
       if (today > expire) now = 0;
-      else if (today > close) now = 5;
-      else if (today > edd) now = 4;
-      else if (tlDiff(today, edd) === 0) now = 3;
-      else if (today >= open) now = 2;
+      else if (today > close) now = 6;
+      else if (today >= edd) now = 5;
+      else if (today >= open) now = 4;
+      else if (today >= eduEnd) now = 3;
+      else if (today >= eduStart) now = 2;
 
       const eduDesc = isNew
-        ? '시·도 지정 교육기관에서 <strong>60시간</strong>(이론 28h·실기 32h) · 약 2~4주 소요 · 교육비 20~25만 원<br/>수료증 발급 후 <strong>제공기관(업체) 소속 등록</strong>까지 마쳐야 매칭돼요.'
-        : '요양보호사·간호사·간호조무사·사회복지사 경력자는 <strong>40시간</strong>(이론 15h·실기 25h) · 약 1~2주 소요 · 교육비 16~20만 원 내외<br/>수료 후 <strong>제공기관(업체) 소속 등록</strong>이 필요해요.';
+        ? '시·도 지정 교육기관에서 <strong>60시간</strong>(이론 28h·실기 32h) · 약 2~4주 소요 · 교육비 20~25만 원'
+        : '요양보호사·간호사·간호조무사·사회복지사 경력자는 <strong>40시간</strong>(이론 15h·실기 25h) · 약 1~2주 소요 · 교육비 16~20만 원 내외';
 
       const steps = [
         {
-          title: '엄마 교육 이수 · 기관 등록',
+          title: '지역 예외지원 · 인정가족 여부 확인',
+          date: `지금 바로 ~ ${tlFmtWd(eduStart)}`,
+          badge: tlDday(eduStart, today),
+          desc: '관할 보건소(또는 주민센터)에 우리 지역이 <strong>예외지원·인정가족</strong> 대상인지 먼저 확인하세요. 건보료 기준중위 150% 초과 가구의 예외지원, 지자체별 추가 지원금, 친정엄마(가족) 인정 여부를 이때 한 번에 물어보면 이후 단계가 수월해요.',
+          check: {
+            id: 'c1',
+            title: '관할 보건소에서 우리 지역 예외지원·인정가족 여부 확인',
+            sub: '건보료 150% 초과 예외지원 및 지역별 추가 지원금 확인'
+          }
+        },
+        {
+          title: '엄마 교육 이수 · 수료증 발급',
           date: `${tlFmtWd(eduStart)} ~ ${tlFmt(eduEnd)}`,
           badge: tlDday(today <= eduStart ? eduStart : eduEnd, today),
-          desc: `${eduDesc}<br/>늦어도 <strong>${tlFmt(eduEnd)}</strong>까지는 수료 + 기관 등록을 끝내 두세요.`
+          desc: `${eduDesc}<br/>늦어도 <strong>${tlFmt(eduEnd)}</strong>까지는 수료증까지 받아 두세요.<br/><a class="inline" href="${TL_EDU_URL}" target="_blank" rel="noopener noreferrer">전자바우처에서 우리 지역 교육기관 찾기</a>`,
+          check: {
+            id: 'c2',
+            title: '어머님 시·도 지정 교육기관 등록 &amp; 교육 이수',
+            sub: '신규 60시간(약 20~25만 원) / 요양보호사·간호사·간호조무사·사회복지사는 경력자 40시간(약 16~20만 원 내외)'
+          }
         },
         {
-          title: '바우처 신청 시작 (예정일 40일 전)',
-          date: tlFmtWd(open),
+          title: '제공기관(업체) 소속 등록 · 수수료 확인',
+          date: `${tlFmt(eduEnd)} ~ ${tlFmt(open)}`,
           badge: tlDday(open, today),
-          desc: '복지로·정부24 온라인 신청 또는 관할 보건소·주민센터 방문. <strong>이날부터</strong> 신청할 수 있고, 신청 기간은 출산 후 60일까지 이어져요.'
+          desc: '교육을 마치면 반드시 <strong>제공기관(업체) 소속으로 등록</strong>돼야 산모와 매칭이 이뤄져요. 이때 친정엄마(가족) 매칭이 되는 곳인지, 수수료율(10~25%)·4대보험 공제·지정비·환불 규정을 <strong>총액 기준</strong>으로 비교하세요.<br/><a class="inline" href="${TL_SUPPLY_URL}" target="_blank" rel="noopener noreferrer">전자바우처에서 제공기관 검색</a>',
+          check: {
+            id: 'c3',
+            title: '산모·신생아 건강관리 제공기관(업체)에 어머님 소속 등록',
+            sub: '가족 매칭 가능 여부 + 기관 수수료율(10~25%)·4대보험 공제 여부 확인'
+          }
         },
         {
-          title: '출산예정일 · 서비스 개시 준비',
+          title: '바우처 신청 (예정일 40일 전 ~ 출산 후 60일)',
+          date: `${tlFmtWd(open)} ~ ${tlFmt(close)} <span class="est">마감 예상</span>`,
+          badge: tlDday(today < open ? open : close, today),
+          desc: '복지로·정부24 온라인 신청 또는 관할 보건소 방문 신청이에요. 신청은 <strong>예정일 40일 전</strong>부터 열리고, 실제 출산일 + 60일까지 가능해요.<br/><a class="inline" href="https://www.bokjiro.go.kr" target="_blank" rel="noopener noreferrer">복지로</a> · <a class="inline" href="https://www.gov.kr" target="_blank" rel="noopener noreferrer">정부24</a>',
+          check: {
+            id: 'c4',
+            title: '출산예정 40일 전 ~ 출산 후 60일 이내 바우처 신청',
+            sub: '복지로·정부24 온라인 또는 관할 보건소 방문 신청'
+          }
+        },
+        {
+          title: '출산 · 가족관계 명시 후 지정 배정',
           date: tlFmtWd(edd),
           badge: tlDday(edd, today),
-          desc: '제공기관에 <strong>친정엄마(가족) 지정</strong>·수수료율(10~25%)·4대보험 공제를 최종 확인하세요. 출산 후 <strong>90일 이내</strong>에 서비스를 시작해야 해요.'
+          desc: '제공기관에 <strong>가족관계(일반·인정)</strong>를 반드시 명시해 등록하세요. 숨기면 지원금을 환수당할 수 있어요. 서비스는 <strong>출산 후 90일 이내</strong>에 시작해야 하고, 미숙아 입원 시에는 퇴원일 기준 예외가 있어요.',
+          check: {
+            id: 'c5',
+            title: "제공기관에 '가족관계' 명시 후 지정 배정",
+            sub: '시스템상 일반(가족) 또는 인정(가족) 등록 여부 꼭 체크'
+          }
         },
         {
-          title: '바우처 신청 마감 (출산일 + 60일)',
-          date: `${tlFmtWd(close)} <span class="est">예상</span>`,
-          badge: tlDday(close, today),
-          desc: '<strong>실제 출산일 + 60일</strong> 기준이에요. 위 날짜는 예정일 + 60일로 계산한 예상일이고, 출산일이 달라지면 마감도 그만큼 밀려요.'
-        },
-        {
-          title: '서비스 이용 마감 (출산일 + 90일)',
+          title: '서비스 이용 완료 · 본인부담금 정산',
           date: `${tlFmtWd(expire)} <span class="est">예상</span>`,
           badge: tlDday(expire, today),
-          desc: '이 날까지 <strong>5·10·15·20일 서비스를 모두 이용 완료</strong>해야 해요. 미숙아 입원 시 퇴원일 기준 예외가 있어요.'
+          desc: '이 날까지 5·10·15일 서비스를 <strong>모두 이용 완료</strong>해야 해요. 본인부담금 결제 수단(첫만남이용권 사용 가능 여부)과 정산·환불 방식을 기관에 미리 확인하세요.',
+          check: {
+            id: 'c6',
+            title: '본인부담금 결제 수단(첫만남이용권 가능 여부 등) 확인',
+            sub: '출산 후 90일 이내 서비스 개시·이용 완료까지 확인'
+          }
         }
       ];
 
-      let nowMain, nowSub;
-      if (now === 1) {
-        nowMain = '1. 엄마 교육 이수';
-        nowSub = today < eduStart
-          ? `${tlFmt(eduStart)}부터 시작하면 여유로워요 · ${tlDday(eduStart, today)}`
-          : `${tlFmt(eduEnd)}까지 수료 + 기관 등록 · ${tlDday(eduEnd, today)}`;
-      } else if (now === 2) {
-        nowMain = '2. 바우처 신청';
-        nowSub = `신청 시작 ${tlFmt(open)} · 마감 ${tlFmt(close)}`;
-      } else if (now === 3) {
-        nowMain = '3. 출산 · 서비스 시작';
-        nowSub = `오늘 출산예정일이에요 · ${tlFmt(expire)}까지 이용 완료`;
-      } else if (now === 4) {
-        nowMain = '4. 바우처 신청 마감';
-        nowSub = `${tlFmt(close)}까지 신청 (예상) · ${tlDday(close, today)}`;
-      } else if (now === 5) {
-        nowMain = '5. 서비스 이용 마감';
-        nowSub = `${tlFmt(expire)}까지 이용 완료 (예상) · ${tlDday(expire, today)}`;
-      } else {
-        nowMain = '이용 기간이 지났어요';
-        nowSub = '실제 출산일 기준으로 다시 계산해 보세요';
-      }
+      const nowMap = {
+        1: ['1. 지역 지원 확인', `${tlFmt(eduStart)}까지 확인 · ${tlDday(eduStart, today)}`],
+        2: ['2. 엄마 교육 이수', `${tlFmt(eduStart)} ~ ${tlFmt(eduEnd)} · ${tlDday(eduEnd, today)}`],
+        3: ['3. 제공기관 등록', `${tlFmt(open)} 전까지 등록 · ${tlDday(open, today)}`],
+        4: ['4. 바우처 신청', `신청 시작 ${tlFmt(open)} · 마감 ${tlFmt(close)}`],
+        5: ['5. 출산 · 가족관계 확인', today.getTime() === edd.getTime()
+          ? `오늘 출산예정일 · ${tlFmt(expire)}까지 이용 완료`
+          : `출산 후 가족관계 명시 확인 · ${tlFmt(close)}까지 신청 가능`],
+        6: ['6. 서비스 이용', `${tlFmt(expire)}까지 이용 완료 · ${tlDday(expire, today)}`]
+      };
+      const [nowMain, nowSub] = now === 0
+        ? ['이용 기간이 지났어요', '실제 출산일 기준으로 다시 계산해 보세요']
+        : nowMap[now];
 
       const left = tlDiff(edd, today);
       const badgeTxt = left === 0 ? '오늘 출산예정일' : `출산예정일 ${tlDday(edd, today)}`;
@@ -717,12 +738,13 @@
       const tlHtml = steps.map((s, i) => {
         const n = i + 1;
         const cls = n === now ? ' now' : (n < now ? ' past' : '');
-        return `<div class="tl-item${cls}">`
+        return `<div class="tl-item${cls}" data-step="${n}">`
           + `<div class="tl-node">${n}</div>`
           + `<div class="tl-body">`
           + `<div class="tl-head"><div class="tl-title">${s.title}</div><span class="tl-dday">${s.badge}</span></div>`
           + `<div class="tl-date">${s.date}</div>`
           + `<div class="tl-desc">${s.desc}</div>`
+          + `<label class="tl-check"><input type="checkbox" id="${s.check.id}" data-id="${s.check.id}" onchange="toggleCheck(this)" /><span class="ck"><b>${s.check.title}</b><small>${s.check.sub}</small></span></label>`
           + `</div></div>`;
       }).join('');
 
@@ -736,11 +758,18 @@
         + `<div><div class="metric-k">신청 마감(예상)</div><div class="metric-v">${tlFmt(close)}</div></div>`
         + `<div><div class="metric-k">이용 마감(예상)</div><div class="metric-v">${tlFmt(expire)}</div></div>`
         + `</div></div>`
-        + `<div class="card" style="margin-top:14px;">`
-        + `<div class="label">🗓 준비 타임라인</div>`
+        + `<div class="card">`
+        + `<div class="label" style="justify-content: space-between; margin-bottom: 4px;"><span>전체 준비 진행률</span><span id="check-progress-text" style="color: var(--accent);">0 / 6 완료</span></div>`
+        + `<div class="progress-wrap"><div class="progress-bar" id="check-progress-bar"></div></div>`
+        + `<p class="progress-note" id="check-progress-note"></p>`
+        + `</div>`
+        + `<div class="card">`
+        + `<div class="label">🗓 준비 타임라인 <span class="pill">6단계</span></div>`
         + `<div class="timeline">${tlHtml}</div>`
-        + `<div class="tip-box" style="margin-top:14px;">💡 이 타임라인은 <strong>출산예정일 기준</strong> 계산이에요. 4·5단계(신청 마감·이용 마감)는 실제 출산일로 다시 계산해 주세요. 지자체마다 신청 창구·기간이 조금씩 다를 수 있어 관할 보건소에 한 번 더 확인하면 좋아요.</div>`
+        + `<div class="tip-box">💡 타임라인은 <strong>출산예정일 기준</strong> 계산이에요. 4단계 신청 마감과 6단계 이용 마감은 실제 출산일로 다시 계산해 주세요. 지자체마다 신청 창구·기간이 조금씩 다를 수 있으니 관할 보건소에 한 번 더 확인하면 좋아요.</div>`
         + `</div>`;
+
+      syncChecks();
     }
 
     (function initTimeline() {
