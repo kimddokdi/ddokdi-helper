@@ -191,11 +191,12 @@
     .metrics.dates .metric-v { font-size: 12.5px; }
 
     .timeline { position: relative; padding-left: 32px; margin-top: 2px; }
-    .timeline::before {
-      content: ""; position: absolute; left: 9px; top: 8px; bottom: 8px;
+    .tl-item { position: relative; padding-bottom: 16px; }
+    .tl-item::before {
+      content: ""; position: absolute; left: -23px; top: 10px; bottom: -10px;
       width: 2px; background: var(--border); border-radius: 2px;
     }
-    .tl-item { position: relative; padding-bottom: 16px; }
+    .tl-item:last-child::before { content: none; }
     .tl-item:last-child { padding-bottom: 0; }
     .tl-node {
       position: absolute; left: -32px; top: 0; width: 20px; height: 20px; border-radius: 50%;
