@@ -429,7 +429,7 @@
     <div id="tab-timeline" class="section">
       <div class="card">
         <div class="label">📅 출산예정일</div>
-        <input type="date" id="tl-edd" class="date-input" aria-label="출산예정일" min="2020-01-01" max="2100-12-31" onchange="setEdd(this.value)" />
+        <input type="date" id="tl-edd" class="date-input" aria-label="출산예정일" min="2020-01-01" max="2100-12-31" />
         <p class="date-hint">예정일을 바꾸면 타임라인과 D-day가 바로 다시 계산돼요. 처음 보이는 날짜는 예시예요.</p>
         <div class="label" style="margin-top:16px;">어머님 자격 구분</div>
         <div class="choices cols-2">
@@ -598,17 +598,19 @@
 
     function setEdd(val) {
       const d = tlParse(val);
-      const input = document.getElementById('tl-edd');
-      if (!d) {
-        // 날짜 입력칸이 덜 채워졌거나 잘못된 값이면 마지막 정상 예정일로 되돌려
-        // 화면의 타임라인과 입력칸이 어긋나지 않게 한다.
-        if (input && tlState.edd) input.value = tlISO(tlState.edd);
-        renderTimeline();
-        return;
-      }
+      // 입력 중인 불완전한 값은 무시하고, 다 채워진 유효한 날짜만 반영한다.
+      if (!d) return;
+      if (tlState.edd && tlISO(d) === tlISO(tlState.edd)) return;
       tlState.edd = d;
       try { localStorage.setItem('ddokdi_helper_edd', tlISO(d)); } catch (e) {}
       renderTimeline();
+    }
+    function restoreEddInput() {
+      // 입력칸을 비우거나 잘못 채운 채로 벗어나면 마지막 정상 예정일로 되돌려
+      // 화면의 타임라인과 입력칸이 어긋나지 않게 한다.
+      const input = document.getElementById('tl-edd');
+      if (!input) return;
+      if (!tlParse(input.value) && tlState.edd) input.value = tlISO(tlState.edd);
     }
 
     function setEdu(btn) {
@@ -675,7 +677,7 @@
           title: '제공기관(업체) 소속 등록 · 수수료 확인',
           date: `${tlFmt(eduEnd)} ~ ${tlFmt(open)}`,
           badge: tlDday(open, today),
-          desc: '교육을 마치면 반드시 <strong>제공기관(업체) 소속으로 등록</strong>돼야 산모와 매칭이 이뤄져요. 이때 친정엄마(가족) 매칭이 되는 곳인지, 수수료율(10~25%)·4대보험 공제·지정비·환불 규정을 <strong>총액 기준</strong>으로 비교하세요.<br/><a class="inline" href="${TL_SUPPLY_URL}" target="_blank" rel="noopener noreferrer">전자바우처에서 제공기관 검색</a>',
+          desc: `교육을 마치면 반드시 <strong>제공기관(업체) 소속으로 등록</strong>돼야 산모와 매칭이 이뤄져요. 이때 친정엄마(가족) 매칭이 되는 곳인지, 수수료율(10~25%)·4대보험 공제·지정비·환불 규정을 <strong>총액 기준</strong>으로 비교하세요.<br/><a class="inline" href="${TL_SUPPLY_URL}" target="_blank" rel="noopener noreferrer">전자바우처에서 제공기관 검색</a>`,
           check: {
             id: 'c3',
             title: '산모·신생아 건강관리 제공기관(업체)에 어머님 소속 등록',
@@ -784,7 +786,12 @@
         try { localStorage.removeItem('ddokdi_helper_edd'); } catch (e) {}
       }
       const input = document.getElementById('tl-edd');
-      if (input) input.value = tlISO(tlState.edd);
+      if (input) {
+        input.value = tlISO(tlState.edd);
+        input.addEventListener('input', () => setEdd(input.value));
+        input.addEventListener('change', () => setEdd(input.value));
+        input.addEventListener('blur', restoreEddInput);
+      }
       document.querySelectorAll('.choice[data-edu]').forEach(b => {
         b.classList.toggle('selected', b.dataset.edu === tlState.edu);
       });
