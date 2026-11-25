@@ -479,7 +479,7 @@
     <div id="tab-timeline" class="section">
       <div class="card">
         <div class="label">📅 출산예정일</div>
-        <input type="date" id="tl-edd" class="date-input" aria-label="출산예정일" onchange="setEdd(this.value)" />
+        <input type="date" id="tl-edd" class="date-input" aria-label="출산예정일" min="2020-01-01" max="2100-12-31" onchange="setEdd(this.value)" />
         <p class="date-hint">예정일을 바꾸면 타임라인이 바로 다시 계산돼요. 처음 보이는 날짜는 예시예요.</p>
         <div class="label" style="margin-top:16px;">어머님 자격 구분</div>
         <div class="choices cols-2">
@@ -586,8 +586,11 @@
       if (!s) return null;
       const p = String(s).split('-').map(Number);
       if (p.length !== 3 || p.some(isNaN)) return null;
+      if (p[0] < 2000 || p[0] > 2100) return null;
       const d = new Date(p[0], p[1] - 1, p[2]);
-      return isNaN(d.getTime()) ? null : d;
+      if (isNaN(d.getTime())) return null;
+      if (d.getFullYear() !== p[0] || d.getMonth() !== p[1] - 1 || d.getDate() !== p[2]) return null;
+      return d;
     };
     const tlPad = (n) => String(n).padStart(2, '0');
     const tlISO = (d) => `${d.getFullYear()}-${tlPad(d.getMonth() + 1)}-${tlPad(d.getDate())}`;
@@ -601,11 +604,9 @@
 
     function setEdd(val) {
       const d = tlParse(val);
+      if (!d) { renderTimeline(); return; }
       tlState.edd = d;
-      try {
-        if (d) localStorage.setItem('ddokdi_helper_edd', tlISO(d));
-        else localStorage.removeItem('ddokdi_helper_edd');
-      } catch (e) {}
+      try { localStorage.setItem('ddokdi_helper_edd', tlISO(d)); } catch (e) {}
       renderTimeline();
     }
 
