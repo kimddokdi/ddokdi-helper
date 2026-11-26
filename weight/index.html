@@ -50,11 +50,18 @@
     .wrap { max-width: 480px; margin: 0 auto; padding: 20px 16px 24px; }
 
     header { margin-bottom: 16px; }
+    .top-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+    .top-link {
+      font-size: 11.5px; font-weight: 700; color: var(--muted); text-decoration: none;
+      background: #fff; border: 1px solid var(--border); border-radius: 999px;
+      padding: 5px 10px; white-space: nowrap; letter-spacing: -0.02em; flex: none;
+    }
+    .top-link b { color: #c2c9d2; font-weight: 700; margin-left: 2px; }
     .brand {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--primary-soft); color: var(--accent);
       font-weight: 800; font-size: 12px; padding: 5px 11px;
-      border-radius: 999px; letter-spacing: -0.01em;
+      border-radius: 999px; letter-spacing: -0.01em; text-decoration: none;
     }
     h1 { font-size: 22px; line-height: 1.32; margin: 10px 0 6px; letter-spacing: -0.03em; font-weight: 800; }
     .subtitle { font-size: 13.5px; color: var(--muted); margin: 0; letter-spacing: -0.01em; }
@@ -322,7 +329,10 @@
 <div class="wrap">
 
   <header>
-    <span class="brand">🤰 김똑디 · 임신 체중</span>
+    <div class="top-row">
+      <a class="brand" href="https://www.instagram.com/ddokdi.kim/" target="_blank" rel="noopener">🤰 @ddokdi.kim</a>
+      <a class="top-link" href="../">산후도우미 계산기 <b>›</b></a>
+    </div>
     <h1>임신 중 적정 체중 증가 계산기</h1>
     <p class="subtitle">출산예정일만 넣으면 <b>지금 몇 주인지</b> 자동으로 계산되고, 내 BMI 곡선 위에 지금 위치가 찍혀요.</p>
   </header>
