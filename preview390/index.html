@@ -11,5 +11,16 @@
 </head>
 <body>
 <iframe id="f" src="../plan/" title="plan 390 preview"></iframe>
+<script>
+  // 데스크톱 스크롤바(14px)를 숨겨 아이폰과 같은 390px 뷰포트로 확인
+  var f = document.getElementById('f');
+  f.addEventListener('load', function () {
+    try {
+      var s = f.contentDocument.createElement('style');
+      s.textContent = 'html{scrollbar-width:none}::-webkit-scrollbar{width:0;height:0}';
+      f.contentDocument.head.appendChild(s);
+    } catch (e) {}
+  });
+</script>
 </body>
 </html>
