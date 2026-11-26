@@ -625,7 +625,7 @@
       var sPaidWon = spousePaid * MAN;
       couple = {
         myThreshold: threshold,
-        myGap: Math.max(0, threshold - general),
+        myGap: Math.max(0, threshold - total),
         spThreshold: spouseGross * MAN * 0.03,
         spGap: Math.max(0, spouseGross * MAN * 0.03 - sPaidWon),
         spGross: spouseGross,
@@ -721,7 +721,7 @@
     var t1, b1, tag1 = '카드';
     if (!c) {
       t1 = '외벌이 · 내 카드로 모으면 돼요';
-      b1 = '12월에 어차피 낼 병원비·치과·안경은 <b>내 카드로</b> 결제하세요. 총급여 3%인 <span class="hl">' + fmtShort(r.threshold) + '</span>를 넘는 금액부터 15%가 돌아와요.';
+      b1 = '12월에 어차피 낼 병원비·치과·안경은 <b>내 카드로</b> 결제하세요. 총급여 3%인 <span class="hl">' + fmtShort(r.threshold) + '</span>을 넘는 금액부터 15%가 돌아와요.';
     } else if (c.myGap <= 0 && c.spGap <= 0) {
       t1 = '두 분 다 이미 문턱을 넘었어요';
       b1 = '12월 결제는 어느 카드로 해도 15% 그대로예요. 굳이 몰아줄 필요 없고, <b>세금을 더 많이 내는 쪽</b>(총급여가 높은 쪽)에 몰면 환급 여지가 조금 더 커요.';
