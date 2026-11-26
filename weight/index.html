@@ -511,6 +511,7 @@
     return isFinite(n) ? n : null;
   }
   function f1(n) { return (Math.round(n * 10) / 10).toFixed(1); }
+  function fk(n) { return String(Math.round(n * 100) / 100); }
   function signed(n) { return (n >= 0 ? '+' : '−') + f1(Math.abs(n)); }
 
   /* ---------- 상태 ---------- */
@@ -815,7 +816,7 @@
       var b = BANDS[d.band];
       rows.push(['만삭(40주) 목표', b.total[0] + '~' + b.total[1] + 'kg',
         d.totLoW != null ? '최종 체중 ' + f1(d.totLoW) + '~' + f1(d.totHiW) + 'kg' : '']);
-      rows.push(['2·3분기 주당', '+' + b.weekly[0] + 'kg', b.weekly[1] + '~' + b.weekly[2] + 'kg 범위']);
+      rows.push(['2·3분기 주당', '+' + b.weekly[0] + 'kg', b.weekly[1].toFixed(2) + '~' + b.weekly[2].toFixed(2) + 'kg 범위']);
       rows.push(['1분기(13주까지)', '0.5~2kg', 'BMI와 상관없이 같아요']);
     } else {
       rows.push(['만삭(40주) 목표', 'BMI별로 달라요', '저체중 12.5~18 / 정상 11.5~16 / 과체중 7~11.5 / 비만 5~9kg']);
@@ -883,7 +884,7 @@
       } else {
         $('#hero-week').textContent = d.weeks + '주 ' + d.days + '일';
         $('#hero-bmi').textContent = d.band
-          ? 'BMI ' + f1(d.bmi) + ' · ' + BANDS[d.band].label + ' · 아이사랑 표기 ' + d.stage.name
+          ? 'BMI ' + f1(d.bmi) + ' · ' + BANDS[d.band].label + (d.stage.note ? ' · 아이사랑 표기 ' + d.stage.name : ' · 임신 전 체중 기준')
           : '키·임신 전 체중을 넣으면 내 기준 곡선이 강조돼요';
       }
 
@@ -929,7 +930,7 @@
 
       var foot = [];
       if (d.lo != null) {
-        foot.push('출산까지 ' + f1(d.totLo) + '~' + f1(d.totHi) + 'kg');
+        foot.push('출산까지 ' + fk(d.totLo) + '~' + fk(d.totHi) + 'kg');
         if (d.totLoW != null) foot.push('최종 체중 ' + f1(d.totLoW) + '~' + f1(d.totHiW) + 'kg');
       }
       $('#hero-foot').textContent = foot.join(' · ');
@@ -1114,7 +1115,7 @@
     // 하단 요약
     g.fillStyle = '#191f28';
     g.font = '800 38px ' + FONT;
-    if (d.lo != null) g.fillText('출산까지 ' + f1(d.totLo) + '~' + f1(d.totHi) + 'kg', 116, 1136);
+    if (d.lo != null) g.fillText('출산까지 ' + fk(d.totLo) + '~' + fk(d.totHi) + 'kg', 116, 1136);
 
     g.fillStyle = '#6b7684';
     g.font = '600 30px ' + FONT;
@@ -1154,7 +1155,7 @@
   function buildShareText(d) {
     var lines = [];
     lines.push('🤰 임신 ' + d.weeks + '주 ' + d.days + '일');
-    if (d.band) lines.push('BMI ' + f1(d.bmi) + ' ' + BANDS[d.band].label + ' · 출산까지 ' + f1(d.totLo) + '~' + f1(d.totHi) + 'kg');
+    if (d.band) lines.push('BMI ' + f1(d.bmi) + ' ' + BANDS[d.band].label + ' · 출산까지 ' + fk(d.totLo) + '~' + fk(d.totHi) + 'kg');
     if (d.gain != null && d.lo != null) {
       lines.push('현재 ' + signed(d.gain) + 'kg · 이번 주 권장 ' + f1(d.lo) + '~' + f1(d.hi) + 'kg');
       if (d.verdict === 'in') lines.push('→ 권장 범위 안이에요');
