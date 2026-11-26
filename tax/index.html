@@ -821,7 +821,7 @@
       var mine = Math.abs(g - r.gross) < 1;
       h += '<tr><td class="' + (mine ? 'mine' : '') + '">' + fmtMan(g) + '</td>' +
         '<td class="' + (mine ? 'mine' : '') + '">' + fmtShort(g * MAN * 0.03) + '</td>' +
-        '<td class="' + (mine ? 'mine' : '') + '">' + fmtShort(MAN * 0.15) + '</td></tr>';
+        '<td class="' + (mine ? 'mine' : '') + '">' + fmtShort(100 * MAN * 0.15) + '</td></tr>';
     });
     h += '</tbody>';
     tb.innerHTML = h;
