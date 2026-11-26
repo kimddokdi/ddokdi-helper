@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>임산부 연말정산 3% 문턱 계산기 | 김똑디</title>
-  <meta name="description" content="총급여와 올해 낸 병원비·산후조리원비만 넣으면 의료비 세액공제 3% 문턱을 넘었는지, 12월 31일 전에 조리원 계약금을 내야 하는지 바로 나와요. 2026년 귀속 기준." />
+  <title>임산부 2026 연말정산 30초 진단기 | 김똑디</title>
+  <meta name="description" content="출산 전인데 올해 연말정산 챙길 게 있을까요? 총급여 3% 문턱, 산후조리원 계약금 타이밍, 맞벌이 카드 몰아주기까지 30초에 계산해 드려요." />
   <meta name="theme-color" content="#f2f4f6" />
-  <meta property="og:title" content="임산부 연말정산 3% 문턱 계산기 | 김똑디" />
-  <meta property="og:description" content="총급여와 의료비만 넣으면 3% 문턱을 넘었는지, 조리원 계약금을 12월에 낼지 1월로 미룰지 3초에 나와요." />
+  <meta property="og:title" content="임산부 2026 연말정산 30초 진단기 | 김똑디" />
+  <meta property="og:description" content="올해 낸 산전 진료비·조리원 계약금으로 총급여 3% 문턱을 넘었는지, 12월 남은 병원비는 누구 카드로 내야 유리한지 30초에 확인하세요." />
   <meta property="og:url" content="https://kimddokdi.github.io/ddokdi-helper/tax/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="김똑디" />
   <meta property="og:locale" content="ko_KR" />
   <meta name="twitter:card" content="summary" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233182f6'/%3E%3Ctext x='32' y='46' font-size='34' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3E%E2%9C%93%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%233182f6'/%3E%3Ctext x='32' y='45' font-size='34' font-family='sans-serif' font-weight='bold' fill='white' text-anchor='middle'%3E%E2%9C%93%3C/text%3E%3C/svg%3E" />
   <style>
     :root {
       --bg: #f2f4f6;
@@ -25,14 +25,13 @@
       --green-soft: #e4f7ef;
       --warn: #b45309;
       --warn-soft: #fef3c7;
-      --red: #d1495b;
       --text: #191f28;
       --muted: #6b7684;
       --faint: #9aa4b0;
       --border: #e5e8eb;
       --radius: 20px;
       --shadow: 0 2px 12px rgba(0, 0, 0, 0.03);
-      --hero-bg: linear-gradient(135deg, #3182f6 0%, #1b64da 100%);
+      --result-bg: linear-gradient(135deg, #3182f6 0%, #1b64da 100%);
       --font: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Noto Sans KR", sans-serif;
     }
 
@@ -51,41 +50,43 @@
 
     header { margin-bottom: 16px; }
     .top-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+    .top-links { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
     .top-link {
-      font-size: 11.5px; font-weight: 700; color: var(--muted); text-decoration: none;
+      font-size: 11px; font-weight: 700; color: var(--muted); text-decoration: none;
       background: #fff; border: 1px solid var(--border); border-radius: 999px;
-      padding: 5px 10px; white-space: nowrap; letter-spacing: -0.02em; flex: none;
+      padding: 5px 9px; white-space: nowrap; letter-spacing: -0.02em; flex: none;
     }
-    .top-link b { color: #c2c9d2; font-weight: 700; margin-left: 2px; }
+    .top-link b { color: #c2c9d2; font-weight: 700; margin-left: 1px; }
     .brand {
       display: inline-flex; align-items: center; gap: 6px;
       background: var(--primary-soft); color: var(--accent);
       font-weight: 800; font-size: 12px; padding: 5px 11px;
       border-radius: 999px; letter-spacing: -0.01em; text-decoration: none;
+      flex: none;
     }
     h1 { font-size: 22px; line-height: 1.32; margin: 10px 0 6px; letter-spacing: -0.03em; font-weight: 800; }
     .subtitle { font-size: 13.5px; color: var(--muted); margin: 0; letter-spacing: -0.01em; }
     .subtitle b { color: var(--accent); font-weight: 700; }
 
-    .dday {
-      display: inline-flex; align-items: center; gap: 6px;
-      margin-top: 10px; background: #fff; border: 1px solid var(--border);
-      border-radius: 999px; padding: 5px 12px; font-size: 12px; font-weight: 700; color: var(--muted);
-    }
-    .dday b { color: var(--red); font-weight: 800; }
-
     .card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 18px; margin-bottom: 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      margin-bottom: 14px;
       box-shadow: var(--shadow);
     }
-    .card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 12px; }
+
+    .card-head {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; margin-bottom: 12px;
+    }
     .card-title { font-size: 14.5px; font-weight: 800; letter-spacing: -0.02em; display: flex; align-items: center; gap: 6px; }
     .pill {
       font-size: 10.5px; font-weight: 700; color: var(--accent);
-      background: var(--primary-soft); padding: 3px 8px; border-radius: 999px; letter-spacing: -0.01em;
+      background: var(--primary-soft); padding: 3px 8px; border-radius: 999px;
+      letter-spacing: -0.01em;
     }
-    .pill.gray { background: #f2f4f6; color: #8b95a1; }
     .mini-btn {
       border: none; background: transparent; color: var(--accent);
       font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
@@ -93,19 +94,28 @@
     }
     .mini-btn:active { opacity: 0.6; }
 
-    .label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .label {
+      font-size: 13px; font-weight: 700; color: var(--text);
+      margin-bottom: 8px; display: flex; align-items: center; gap: 6px;
+    }
     .label .opt { font-size: 11.5px; font-weight: 600; color: var(--faint); }
     .step-num {
       display: inline-flex; width: 19px; height: 19px; align-items: center; justify-content: center;
-      background: var(--primary); color: #fff; border-radius: 50%; font-size: 11px; font-weight: 700; flex: none;
+      background: var(--primary); color: #fff; border-radius: 50%; font-size: 11px; font-weight: 700;
+      flex: none;
     }
     .field-group { margin-bottom: 15px; }
     .field-group:last-child { margin-bottom: 0; }
 
     .input {
-      width: 100%; height: 48px; border: 1.5px solid var(--border); border-radius: 14px;
-      background: #fff; padding: 0 13px; font-family: inherit; font-size: 16px; font-weight: 600;
-      color: var(--text); letter-spacing: -0.01em; appearance: none; -webkit-appearance: none;
+      width: 100%; height: 48px;
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      background: #fff;
+      padding: 0 13px;
+      font-family: inherit; font-size: 16px; font-weight: 600;
+      color: var(--text); letter-spacing: -0.01em;
+      appearance: none; -webkit-appearance: none;
       outline: none; transition: border-color .15s, box-shadow .15s;
     }
     .input::placeholder { color: #b0b8c1; font-weight: 500; }
@@ -113,142 +123,215 @@
     .input[type="number"]::-webkit-outer-spin-button,
     .input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .input[type="number"] { -moz-appearance: textfield; }
+    .input:disabled { background: #f7f8fa; color: #b0b8c1; }
 
     .unit-field { position: relative; }
-    .unit-field .input { padding-right: 44px; }
-    .unit {
-      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-      font-size: 13px; font-weight: 700; color: var(--faint); pointer-events: none;
+    .unit-field .input { padding-right: 40px; }
+    .unit-field .unit {
+      position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+      font-size: 12.5px; color: var(--faint); font-weight: 700; pointer-events: none;
     }
-    .hint { font-size: 12px; color: var(--faint); margin: 7px 0 0; letter-spacing: -0.01em; }
-    .hint b { color: var(--muted); font-weight: 700; }
 
-    /* 결과 */
+    .hint { font-size: 11.8px; color: var(--faint); margin: 7px 0 0; letter-spacing: -0.01em; line-height: 1.5; }
+    .hint b { color: var(--accent); }
+
+    .switch-line {
+      display: flex; align-items: center; gap: 8px;
+      margin-top: 9px; font-size: 12.3px; color: var(--muted); font-weight: 600;
+      letter-spacing: -0.01em; cursor: pointer; user-select: none;
+    }
+    .switch-line input {
+      width: 18px; height: 18px; margin: 0; accent-color: var(--primary); flex: none; cursor: pointer;
+    }
+    .sub-field { margin-top: 10px; }
+    .sub-field[hidden] { display: none; }
+    .sub-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; display: block; }
+
+    /* HERO */
     .hero {
-      background: var(--hero-bg); color: #fff; border-radius: var(--radius);
-      padding: 20px 18px 18px; margin-bottom: 14px; box-shadow: 0 8px 24px rgba(27,100,218,.22);
+      background: var(--result-bg);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 20px 18px 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 22px rgba(49, 130, 246, 0.20);
       position: relative; overflow: hidden;
     }
-    .hero.empty { background: #fff; color: var(--text); border: 1px dashed var(--border); box-shadow: none; }
+    .hero::after {
+      content: ""; position: absolute; right: -40px; top: -50px;
+      width: 170px; height: 170px; border-radius: 50%;
+      background: rgba(255,255,255,.08); pointer-events: none;
+    }
+    .hero.over { background: linear-gradient(135deg, #0d9c6b 0%, #0b7d56 100%); box-shadow: 0 8px 22px rgba(13,156,107,.22); }
     .hero-badge {
-      display: inline-block; background: rgba(255,255,255,.18); color: #fff;
-      font-size: 11.5px; font-weight: 800; padding: 4px 10px; border-radius: 999px; letter-spacing: -0.01em;
+      display: inline-block; background: #fff; color: var(--accent);
+      font-size: 12px; font-weight: 800; padding: 5px 11px; border-radius: 999px;
+      margin-bottom: 12px; letter-spacing: -0.02em; position: relative; z-index: 1;
     }
-    .hero.empty .hero-badge { background: var(--primary-soft); color: var(--accent); }
-    .hero-badge.ok { background: rgba(13,156,107,.9); }
-    .hero-badge.no { background: rgba(180,83,9,.9); }
-    .hero-cap { font-size: 12.5px; font-weight: 600; opacity: .78; margin-top: 10px; letter-spacing: -0.01em; }
-    .hero.empty .hero-cap { color: var(--muted); }
-    .hero-main { font-size: 34px; font-weight: 800; letter-spacing: -0.04em; margin-top: 2px; line-height: 1.25; }
-    .hero-sub { font-size: 13px; font-weight: 600; opacity: .86; margin-top: 4px; letter-spacing: -0.01em; }
-    .hero.empty .hero-sub { color: var(--muted); }
+    .hero.over .hero-badge { color: var(--green); }
+    .hero-badge.warn { color: var(--warn); }
+    .hero-cap { font-size: 12.5px; opacity: 0.9; letter-spacing: -0.01em; position: relative; z-index: 1; }
+    .hero-big {
+      font-size: 30px; font-weight: 800; letter-spacing: -0.045em; line-height: 1.2;
+      margin: 2px 0 4px; position: relative; z-index: 1;
+    }
+    .hero.empty .hero-big { font-size: 19px; letter-spacing: -0.03em; margin: 4px 0 6px; }
+    .hero-status { font-size: 13.5px; opacity: 0.97; letter-spacing: -0.01em; position: relative; z-index: 1; font-weight: 700; }
+    .hero-status .num { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
     .hero-metrics {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
-      margin-top: 16px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.22);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+      margin: 15px 0 0; padding: 13px 0 0;
+      border-top: 1px solid rgba(255,255,255,.24);
+      position: relative; z-index: 1;
     }
-    .hero.empty .hero-metrics { border-top: 1px solid var(--border); }
-    .hero-metrics div { display: flex; flex-direction: column; gap: 2px; }
-    .hero-metrics .k { font-size: 11px; font-weight: 600; opacity: .78; letter-spacing: -0.01em; }
-    .hero.empty .hero-metrics .k { color: var(--faint); }
-    .hero-metrics .v { font-size: 15.5px; font-weight: 800; letter-spacing: -0.03em; }
+    .hero-metrics .k { display: block; font-size: 11.5px; opacity: .82; letter-spacing: -0.01em; }
+    .hero-metrics .v { display: block; font-size: 19px; font-weight: 800; letter-spacing: -0.03em; margin-top: 1px; }
+    .hero-metrics .v small { font-size: 11.5px; font-weight: 600; opacity: .82; letter-spacing: -0.01em; }
     .hero-note {
-      margin-top: 14px; background: rgba(255,255,255,.14); border-radius: 12px;
-      padding: 10px 12px; font-size: 12.5px; font-weight: 600; letter-spacing: -0.01em;
+      font-size: 12.3px; margin-top: 12px; letter-spacing: -0.01em; line-height: 1.55;
+      background: rgba(255,255,255,.14); border-radius: 12px; padding: 9px 11px;
+      position: relative; z-index: 1;
     }
-    .hero.empty .hero-note { background: #f8f9fa; color: var(--muted); }
-    .hero-note b { font-weight: 800; }
-    .hero-foot { margin-top: 10px; font-size: 11px; opacity: .7; letter-spacing: -0.01em; }
-    .hero.empty .hero-foot { color: var(--faint); }
+    .hero-foot { font-size: 11.5px; opacity: .88; margin-top: 9px; letter-spacing: -0.01em; position: relative; z-index: 1; }
 
-    .bar { height: 8px; background: rgba(255,255,255,.24); border-radius: 999px; margin-top: 14px; overflow: hidden; }
-    .hero.empty .bar { background: #eef1f4; }
-    .bar > i { display: block; height: 100%; background: #fff; border-radius: 999px; width: 0%; transition: width .35s ease; }
-    .hero.empty .bar > i { background: var(--primary); }
-    .bar-cap { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; opacity: .8; margin-top: 5px; letter-spacing: -0.01em; }
-    .hero.empty .bar-cap { color: var(--faint); }
-
-    /* 계산 근거 */
-    .calc-rows { display: flex; flex-direction: column; gap: 0; }
-    .calc-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px solid #f2f4f6; }
-    .calc-row:last-child { border-bottom: none; }
-    .calc-row .k { font-size: 12.5px; color: var(--muted); font-weight: 600; letter-spacing: -0.01em; }
-    .calc-row .k small { color: var(--faint); font-weight: 500; }
-    .calc-row .v { font-size: 14px; font-weight: 800; letter-spacing: -0.02em; white-space: nowrap; }
-    .calc-row .v.blue { color: var(--accent); }
-    .calc-row .v.warn { color: var(--warn); }
-
-    /* 총급여 표 */
-    table.ranges { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; }
-    table.ranges th { color: var(--faint); font-weight: 700; font-size: 11px; text-align: right; padding: 6px 4px; border-bottom: 1px solid var(--border); }
-    table.ranges th:first-child { text-align: left; }
-    table.ranges td { padding: 9px 4px; border-bottom: 1px solid #f4f6f8; text-align: right; letter-spacing: -0.02em; }
-    table.ranges td:first-child { text-align: left; font-weight: 700; }
-    table.ranges td.save { color: var(--accent); font-weight: 800; }
-    table.ranges tr.me td { background: var(--primary-soft); }
-    table.ranges tr.me td:first-child { border-radius: 8px 0 0 8px; }
-    table.ranges tr.me td:last-child { border-radius: 0 8px 8px 0; }
-
-    /* 체크리스트 */
-    .chk-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-    .chk-progress { font-size: 12px; font-weight: 800; color: var(--accent); }
-    .chk-group { font-size: 11.5px; font-weight: 800; color: var(--faint); letter-spacing: 0.01em; margin: 14px 0 6px; }
-    .chk-item {
-      display: flex; align-items: flex-start; gap: 10px; padding: 10px 0;
-      border-bottom: 1px solid #f4f6f8; cursor: pointer;
+    /* RECOMMENDATION */
+    .rec { display: grid; gap: 10px; }
+    .rec-item {
+      border: 1px solid #eef1f4; border-radius: 15px; padding: 13px 13px 12px;
+      background: #fbfcfd;
     }
-    .chk-item:last-child { border-bottom: none; }
-    .chk-box {
-      width: 20px; height: 20px; flex: none; margin-top: 2px;
-      border: 2px solid #cfd6dd; border-radius: 7px; background: #fff;
-      display: flex; align-items: center; justify-content: center; transition: all .12s;
+    .rec-top { display: flex; align-items: center; gap: 7px; margin-bottom: 5px; }
+    .rec-icon { font-size: 15px; flex: none; }
+    .rec-title { font-size: 13px; font-weight: 800; letter-spacing: -0.02em; }
+    .rec-tag {
+      margin-left: auto; font-size: 10px; font-weight: 800; color: var(--accent);
+      background: var(--primary-soft); border-radius: 999px; padding: 2px 7px; letter-spacing: -0.01em;
+      flex: none;
     }
-    .chk-box::after { content: ""; width: 9px; height: 5px; border-left: 2.5px solid #fff; border-bottom: 2.5px solid #fff; transform: rotate(-45deg) translate(0.5px, -1px); opacity: 0; }
-    .chk-item.on .chk-box { background: var(--primary); border-color: var(--primary); }
-    .chk-item.on .chk-box::after { opacity: 1; }
-    .chk-text { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.45; }
-    .chk-text small { display: block; font-size: 11.5px; font-weight: 500; color: var(--faint); margin-top: 2px; }
-    .chk-item.on .chk-text { color: var(--faint); text-decoration: line-through; }
-    .chk-item.on .chk-text small { text-decoration: none; }
-    .link-btn {
-      display: flex; align-items: center; justify-content: center; gap: 4px;
-      width: 100%; height: 44px; margin-top: 12px; border-radius: 14px;
-      background: var(--primary-soft); color: var(--accent); font-weight: 800; font-size: 13px;
-      text-decoration: none; letter-spacing: -0.02em;
+    .rec-tag.gray { color: #8b95a1; background: #f2f4f6; }
+    .rec-body { font-size: 12.3px; color: #4e5968; line-height: 1.62; letter-spacing: -0.01em; }
+    .rec-body b { color: var(--text); font-weight: 800; }
+    .rec-body .hl { color: var(--accent); font-weight: 800; }
+
+    /* INFO */
+    .info-grid { display: grid; gap: 8px; }
+    .info-row {
+      display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+      padding: 10px 0; border-bottom: 1px solid #f0f2f5;
     }
+    .info-row:last-child { border-bottom: none; padding-bottom: 2px; }
+    .info-row:first-child { padding-top: 2px; }
+    .info-k { font-size: 12.5px; color: var(--muted); letter-spacing: -0.02em; flex: none; }
+    .info-v { font-size: 13.5px; font-weight: 800; letter-spacing: -0.02em; text-align: right; }
+    .info-v small { display: block; font-size: 11px; font-weight: 600; color: var(--faint); letter-spacing: -0.01em; }
 
-    /* 주의 */
-    .warn-list { display: flex; flex-direction: column; gap: 10px; }
-    .warn-item { display: flex; gap: 9px; font-size: 12.5px; color: var(--muted); letter-spacing: -0.01em; line-height: 1.5; }
-    .warn-item .ico { flex: none; font-size: 13px; }
-    .warn-item b { color: var(--text); font-weight: 800; }
-
+    /* TABLE */
     details.table-box { margin-top: 4px; }
-    details.table-box summary {
-      list-style: none; cursor: pointer; font-size: 12.5px; font-weight: 700; color: var(--accent);
-      padding: 10px 0; display: flex; align-items: center; gap: 4px;
+    details.table-box > summary {
+      list-style: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 13px; font-weight: 800; color: var(--text); letter-spacing: -0.02em;
+      padding: 11px 0;
     }
-    details.table-box summary::-webkit-details-marker { display: none; }
-    details.table-box summary .chev::after { content: "›"; display: inline-block; transform: rotate(90deg); font-size: 14px; }
+    details.table-box > summary::-webkit-details-marker { display: none; }
+    summary .chev {
+      width: 8px; height: 8px; border-right: 2px solid #aeb7c2; border-bottom: 2px solid #aeb7c2;
+      transform: rotate(45deg); transition: transform .2s; margin-right: 3px; margin-top: -4px;
+    }
+    details[open] summary .chev { transform: rotate(-135deg); margin-top: 2px; }
 
-    .next-card {
-      display: flex; align-items: center; gap: 12px; background: #fff;
-      border: 1px solid var(--border); border-radius: var(--radius); padding: 16px;
-      text-decoration: none; color: inherit; margin-bottom: 14px; box-shadow: var(--shadow);
+    table.ranges { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    table.ranges th, table.ranges td {
+      text-align: center; padding: 8px 2px; font-size: 11.5px; letter-spacing: -0.02em;
+      border-bottom: 1px solid #f0f2f5;
     }
-    .next-icon { font-size: 22px; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--primary-soft); border-radius: 12px; flex: none; }
+    table.ranges th { color: var(--muted); font-weight: 700; padding-bottom: 6px; }
+    table.ranges td { color: #4e5968; font-weight: 600; }
+    table.ranges th.mine, table.ranges td.mine { background: var(--primary-soft); color: var(--accent); font-weight: 800; }
+    table.ranges tr:last-child td { border-bottom: none; }
+
+    /* CHECKLIST */
+    .check-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+    .check-count { font-size: 12px; font-weight: 800; color: var(--accent); letter-spacing: -0.01em; }
+    .bar {
+      height: 8px; border-radius: 999px; background: #eef1f4; overflow: hidden; margin: 8px 0 14px;
+    }
+    .bar > span {
+      display: block; height: 100%; width: 0%; border-radius: 999px;
+      background: linear-gradient(90deg, #3182f6, #1b64da);
+      transition: width .3s ease;
+    }
+    .check-row {
+      display: flex; align-items: flex-start; gap: 10px; width: 100%;
+      border: none; background: transparent; text-align: left; font-family: inherit;
+      padding: 11px 2px; border-bottom: 1px solid #f0f2f5; cursor: pointer;
+      letter-spacing: -0.01em;
+    }
+    .check-row:last-child { border-bottom: none; }
+    .check-box {
+      width: 21px; height: 21px; border-radius: 7px; border: 1.8px solid #d5dae0;
+      flex: none; margin-top: 1px; display: flex; align-items: center; justify-content: center;
+      color: transparent; font-size: 13px; font-weight: 900; background: #fff;
+      transition: background .15s, border-color .15s;
+    }
+    .check-row.done .check-box { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .check-text { display: block; }
+    .check-title { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.45; }
+    .check-row.done .check-title { color: #9aa4b0; text-decoration: line-through; }
+    .check-sub { font-size: 11.5px; color: var(--faint); margin-top: 2px; line-height: 1.5; }
+    .check-row.done .check-sub { color: #c2c9d2; }
+
+    /* BUTTONS */
+    .btn {
+      border: none; border-radius: 14px; font-family: inherit;
+      font-size: 13.5px; font-weight: 800; letter-spacing: -0.02em;
+      padding: 14px 10px; cursor: pointer; display: flex; align-items: center;
+      justify-content: center; gap: 6px;
+    }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(49,130,246,.24); }
+    .btn-ghost { background: #f2f4f6; color: #4e5968; }
+    .btn:active { transform: scale(.985); opacity: .92; }
+    .share-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+
+    /* FOOTER / NEXT */
+    .next-card {
+      display: flex; align-items: center; gap: 12px;
+      background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 15px 16px; margin-bottom: 10px; text-decoration: none; color: inherit;
+      box-shadow: var(--shadow);
+    }
+    .next-icon {
+      width: 40px; height: 40px; border-radius: 13px; background: var(--primary-soft);
+      display: flex; align-items: center; justify-content: center; font-size: 19px; flex: none;
+    }
     .next-title { font-size: 13.5px; font-weight: 800; letter-spacing: -0.02em; }
     .next-sub { font-size: 11.5px; color: var(--faint); margin-top: 1px; letter-spacing: -0.01em; }
-    .next-arrow { margin-left: auto; color: #c2c9d2; font-size: 20px; }
+    .next-arrow { margin-left: auto; color: #c2c9d2; font-size: 18px; font-weight: 700; }
+
+    footer { text-align: center; padding: 10px 4px 10px; }
+    footer .handle { font-size: 12.5px; font-weight: 800; color: var(--accent); text-decoration: none; letter-spacing: -0.01em; }
+    footer .fnav { margin: 8px 0 9px; font-size: 11.5px; color: var(--muted); letter-spacing: -0.01em; }
+    footer .fnav a { color: var(--accent); font-weight: 700; text-decoration: none; }
+    footer .src { font-size: 11px; color: var(--faint); margin-top: 6px; line-height: 1.7; letter-spacing: -0.01em; }
 
     .disclaimer {
-      background: #f8f9fa; border-radius: 16px; padding: 14px 16px;
-      font-size: 11.5px; color: var(--muted); line-height: 1.6; letter-spacing: -0.01em; margin-bottom: 16px;
+      background: #fff; border: 1px solid var(--border); border-radius: 16px;
+      padding: 14px 15px; margin-bottom: 14px;
+      font-size: 11.8px; color: var(--muted); line-height: 1.7; letter-spacing: -0.01em;
     }
-    .disclaimer .t { font-size: 11.5px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .disclaimer b { color: var(--warn); font-weight: 800; }
+    .disclaimer .t { font-size: 12px; font-weight: 800; color: var(--text); margin-bottom: 5px; letter-spacing: -0.02em; }
+    .disclaimer p { margin: 0 0 7px; }
+    .disclaimer p:last-child { margin-bottom: 0; }
 
-    footer { text-align: center; font-size: 11px; color: var(--faint); line-height: 1.7; letter-spacing: -0.01em; }
-    footer .handle { color: var(--accent); font-weight: 800; text-decoration: none; font-size: 12px; }
-    footer .src { margin-top: 6px; }
+    .toast {
+      position: fixed; left: 50%; bottom: 26px; transform: translate(-50%, 14px);
+      background: rgba(25,31,40,.94); color: #fff; font-size: 12.5px; font-weight: 700;
+      padding: 10px 16px; border-radius: 999px; letter-spacing: -0.01em;
+      opacity: 0; pointer-events: none; transition: opacity .22s, transform .22s; z-index: 80;
+      max-width: 88vw; text-align: center;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
   </style>
 </head>
 <body>
@@ -256,12 +339,14 @@
 
   <header>
     <div class="top-row">
-      <a class="brand" href="https://www.instagram.com/ddokdi.kim/" target="_blank" rel="noopener">🤰 @ddokdi.kim</a>
-      <a class="top-link" href="../weight/">체중 계산기 <b>›</b></a>
+      <a class="brand" href="https://www.instagram.com/ddokdi.kim/" target="_blank" rel="noopener">🧾 @ddokdi.kim</a>
+      <div class="top-links">
+        <a class="top-link" href="../weight/">체중 계산기 <b>›</b></a>
+        <a class="top-link" href="../">산후도우미 <b>›</b></a>
+      </div>
     </div>
-    <h1>임산부 연말정산<br />3% 문턱 계산기</h1>
-    <p class="subtitle">총급여와 올해 낸 의료비만 넣으면 <b>12월 31일 전에 뭘 해야 하는지</b> 바로 나와요.</p>
-    <div class="dday" id="dday">2026년 귀속 · <b>D-35</b></div>
+    <h1>임산부 2026 연말정산 30초 진단기</h1>
+    <p class="subtitle">출산 전이라도 <b>올해 낸 병원비</b>는 돌려받을 수 있어요. 문턱을 넘었는지부터 확인해 보세요.</p>
   </header>
 
   <!-- 1. 입력 -->
@@ -272,348 +357,649 @@
     </div>
 
     <div class="field-group">
-      <label class="label" for="gross"><span class="step-num">1</span>올해 총급여 <span class="opt">세전 · 비과세 제외</span></label>
+      <label class="label" for="gross"><span class="step-num">1</span>내 총급여</label>
       <div class="unit-field">
         <input class="input" id="gross" type="number" inputmode="numeric" step="10" min="0" max="100000" placeholder="예: 5000" />
         <span class="unit">만원</span>
       </div>
-      <p class="hint">작년 원천징수영수증의 <b>‘급여’</b> 칸이 가장 정확해요.</p>
+      <p class="hint">작년 원천징수영수증의 <b>총급여</b> 칸이에요. 비과세는 빠진 금액이에요.</p>
     </div>
 
     <div class="field-group">
-      <label class="label" for="hosp"><span class="step-num">2</span>올해 낸 병원비 <span class="opt">본인 부담만</span></label>
+      <div class="label"><span class="step-num">2</span>배우자 총급여 <span class="opt">맞벌이만</span></div>
       <div class="unit-field">
-        <input class="input" id="hosp" type="number" inputmode="numeric" step="10" min="0" max="10000" placeholder="예: 30" />
+        <input class="input" id="spouse" type="number" inputmode="numeric" step="10" min="0" max="100000" placeholder="외벌이면 비워두세요" />
         <span class="unit">만원</span>
       </div>
-      <p class="hint">국민행복카드로 낸 금액과 실손보험금은 <b>빼고</b> 넣어 주세요.</p>
+      <label class="switch-line"><input type="checkbox" id="single" /> 외벌이예요 (배우자 소득 없음)</label>
+      <div class="sub-field" id="spouse-paid-wrap" hidden>
+        <label class="sub-label" for="spouse-paid">배우자 카드로 낸 의료비 (선택)</label>
+        <div class="unit-field">
+          <input class="input" id="spouse-paid" type="number" inputmode="numeric" step="1" min="0" max="100000" placeholder="모르면 비워두세요" />
+          <span class="unit">만원</span>
+        </div>
+      </div>
     </div>
 
     <div class="field-group">
-      <label class="label" for="care"><span class="step-num">3</span>산후조리원비 <span class="opt">출산 1회 200만원까지</span></label>
+      <label class="label" for="med"><span class="step-num">3</span>올해 내가 직접 낸 의료비</label>
       <div class="unit-field">
-        <input class="input" id="care" type="number" inputmode="numeric" step="10" min="0" max="10000" placeholder="예: 200 (계약금 포함)" />
+        <input class="input" id="med" type="number" inputmode="numeric" step="1" min="0" max="100000" placeholder="예: 120" />
         <span class="unit">만원</span>
       </div>
-      <p class="hint" id="care-hint">아직 안 냈으면 <b>낼 예정 금액</b>을 넣어 보세요.</p>
+      <p class="hint">산전 진료비·초음파·처방약·치과·안경까지. <b>국민행복카드 바우처와 실손보험금은 빼고</b> 넣어주세요. 조리원비·난임은 아래에 따로!</p>
+    </div>
+
+    <div class="field-group">
+      <label class="label" for="inf"><span class="step-num">4</span>난임시술비 <span class="opt">선택</span></label>
+      <div class="unit-field">
+        <input class="input" id="inf" type="number" inputmode="numeric" step="1" min="0" max="100000" placeholder="해당 없으면 비워두세요" />
+        <span class="unit">만원</span>
+      </div>
+      <p class="hint">시술비는 공제율이 <b>30%</b>로 두 배예요. 영수증·진료확인서를 따로 모아두세요.</p>
+    </div>
+
+    <div class="field-group">
+      <label class="label" for="care"><span class="step-num">5</span>올해 낸 산후조리원 계약금 <span class="opt">선택</span></label>
+      <div class="unit-field">
+        <input class="input" id="care" type="number" inputmode="numeric" step="10" min="0" max="2000" placeholder="아직 안 냈으면 비워두세요" />
+        <span class="unit">만원</span>
+      </div>
+      <p class="hint">조리원비는 <b>출산 1회당 200만원</b>까지 의료비로 인정돼요. 결제한 해 기준!</p>
     </div>
   </section>
 
   <!-- 2. 결과 -->
   <section class="hero empty" id="hero">
-    <div class="hero-badge" id="hero-badge">3초면 끝나요</div>
-    <div class="hero-cap" id="hero-cap">내 3% 문턱</div>
-    <div class="hero-main" id="hero-main">숫자를 넣어 주세요</div>
-    <div class="hero-sub" id="hero-sub">총급여만 넣어도 문턱이 나와요</div>
+    <div class="hero-badge" id="hero-badge">30초 진단</div>
+    <div class="hero-cap" id="hero-cap">총급여의 3%가 문턱이에요</div>
+    <div class="hero-big" id="hero-big">총급여를 넣어 주세요</div>
+    <div class="hero-status" id="hero-status">내 문턱과 예상 세액공제를 바로 계산해 드려요</div>
     <div class="hero-metrics">
-      <div><span class="k">3% 문턱</span><span class="v" id="m-thr">—</span></div>
-      <div><span class="k">인정 의료비</span><span class="v" id="m-eligible">—</span></div>
-      <div><span class="k">예상 절감</span><span class="v" id="m-save">—</span></div>
+      <div><span class="k">예상 세액공제</span><span class="v" id="hero-tax">—</span></div>
+      <div><span class="k">지방세 포함</span><span class="v" id="hero-tax2">—</span></div>
     </div>
-    <div class="bar"><i id="bar"></i></div>
-    <div class="bar-cap"><span>0</span><span id="bar-cap-right">문턱</span></div>
-    <div class="hero-note" id="hero-note">총급여를 넣으면 3% 문턱부터 알려드려요.</div>
-    <div class="hero-foot" id="hero-foot">2026년 귀속 · 의료비 세액공제 15% 기준</div>
+    <div class="hero-note" id="hero-note">실제 환급액은 그해 낸 세금(결정세액)을 넘지 않아요.</div>
+    <div class="hero-foot" id="hero-foot"></div>
   </section>
 
-  <!-- 3. 계산 근거 -->
+  <!-- 3. 이번 달에 할 일 -->
   <section class="card">
-    <div class="card-head" style="margin-bottom:4px;">
-      <div class="card-title">계산 근거</div>
-      <span class="pill gray">15% 세액공제</span>
+    <div class="card-head">
+      <div class="card-title">그래서 12월에 뭘 할까요</div>
+      <span class="pill">맞춤 3가지</span>
     </div>
-    <div class="calc-rows">
-      <div class="calc-row"><span class="k">총급여의 3% <small>문턱</small></span><span class="v" id="r-thr">—</span></div>
-      <div class="calc-row"><span class="k">인정 의료비 <small>조리원비(200만원 한도) + 병원비</small></span><span class="v" id="r-eligible">—</span></div>
-      <div class="calc-row"><span class="k">문턱을 넘은 금액</span><span class="v blue" id="r-excess">—</span></div>
-      <div class="calc-row"><span class="k">× 15% <small>세금에서 빼는 금액</small></span><span class="v blue" id="r-save">—</span></div>
-      <div class="calc-row"><span class="k">지방소득세 포함 <small>× 16.5%</small></span><span class="v" id="r-save2">—</span></div>
-    </div>
-    <p class="hint" style="margin-top:10px;">세액공제는 <b>내가 낼 세금에서 빼는 것</b>이라, 낼 세금이 그보다 적으면 그만큼만 줄어요.</p>
+    <div class="rec" id="rec-list"></div>
   </section>
 
-  <!-- 4. 총급여별 표 -->
+  <!-- 4. 숫자 요약 -->
   <section class="card">
-    <div class="card-head" style="margin-bottom:2px;">
-      <div class="card-title">총급여별 3% 문턱</div>
-      <span class="pill gray">조리원 200만원 기준</span>
+    <div class="card-head" style="margin-bottom:6px;">
+      <div class="card-title">숫자로 보기</div>
     </div>
-    <table class="ranges" id="gross-table">
-      <thead>
-        <tr><th>총급여</th><th>3% 문턱</th><th>공제대상</th><th>세금 절감</th></tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-    <p class="hint" style="margin-top:9px;">조리원비만 냈다고 가정했어요. 병원비가 있으면 더 넘기 쉽고, 7,000만원은 다른 의료비로 채워야 해요.</p>
+    <div class="info-grid" id="info-grid"></div>
+    <details class="table-box">
+      <summary>총급여별 3% 문턱 표 <span class="chev"></span></summary>
+      <table class="ranges" id="ranges-table"></table>
+      <p class="hint" style="margin-top:9px;">문턱을 넘긴 금액의 15%(난임 30%)가 세금에서 빠져요. 지방소득세까지 하면 실효 16.5%(난임 33%).</p>
+    </details>
   </section>
 
   <!-- 5. 체크리스트 -->
   <section class="card">
     <div class="card-head" style="margin-bottom:2px;">
       <div class="card-title">12월 31일 전 체크리스트</div>
-      <span class="chk-progress" id="chk-progress">0/9</span>
+      <button class="mini-btn" id="btn-reset" type="button">초기화</button>
     </div>
-    <div class="chk-group">12월 31일 전에</div>
-    <div id="chk-list-1"></div>
-    <div class="chk-group">2027년 1월에</div>
-    <div id="chk-list-2"></div>
-    <a class="link-btn" href="https://www.hometax.go.kr/" target="_blank" rel="noopener">홈택스 연말정산 미리보기 열기 ›</a>
+    <div class="check-head">
+      <span class="check-count" id="check-count">0 / 5 완료</span>
+      <span class="pill" style="background:#f2f4f6;color:#8b95a1;">자동 저장</span>
+    </div>
+    <div class="bar"><span id="bar-fill"></span></div>
+    <div id="check-list"></div>
   </section>
 
-  <!-- 6. 주의 -->
+  <!-- 6. 공유 -->
   <section class="card">
-    <div class="card-head" style="margin-bottom:8px;">
-      <div class="card-title">이건 꼭 빼고 넣으세요</div>
+    <div class="card-head" style="margin-bottom:10px;">
+      <div class="card-title">남편에게 보내기</div>
     </div>
-    <div class="warn-list">
-      <div class="warn-item"><span class="ico">💳</span><div><b>국민행복카드로 낸 금액</b> — 국가가 부담한 돈이라 내 의료비가 아니에요. 간소화에 섞여 뜰 수 있어 직접 빼야 해요.</div></div>
-      <div class="warn-item"><span class="ico">🏥</span><div><b>실손보험금</b> — 받은 만큼 차감해요. 병원비를 낸 해의 의료비에서 빼면 돼요.</div></div>
-      <div class="warn-item"><span class="ico">💊</span><div><b>영양제(건강기능식품)</b> — 의료비 공제 대상이 아니에요. 미용·성형도 안 돼요.</div></div>
-      <div class="warn-item"><span class="ico">🧾</span><div><b>조리원비 영수증</b> — 간소화에 안 뜨는 경우가 많아요. 1월에 안 보이면 조리원에 직접 요청하세요.</div></div>
-      <div class="warn-item"><span class="ico">📅</span><div><b>결제한 해 기준</b> — 예약금을 올해, 잔금을 내년에 내면 각각 그 해 의료비예요. (한도는 합쳐 200만원)</div></div>
+    <div class="share-grid">
+      <button class="btn btn-primary" id="btn-copy" type="button">결과 텍스트 복사</button>
+      <button class="btn btn-ghost" id="btn-share" type="button">공유하기</button>
     </div>
+    <p class="hint" style="margin-top:10px;">"12월 병원비 어느 카드로 긁을지" 고민될 때 그대로 보내세요.</p>
   </section>
 
-  <!-- 7. 다음 도구 -->
+  <!-- 7. 안내 -->
+  <section class="disclaimer">
+    <div class="t">꼭 읽어 주세요</div>
+    <p><b>저는 세무사가 아니에요.</b> 2026년 귀속 기준 소득세법·국세청 안내를 정리한 참고용 계산기예요. 개인 상황(결정세액, 다른 공제, 회사 처리 방식)에 따라 결과가 달라져요.</p>
+    <p>의료비 공제는 <b>결제한 해</b> 기준이 원칙이에요. 다만 조리원 계약금을 출산 전 해에 넣는 처리는 회사·국세청 상담 사례가 갈리니, <b>결제 전 회사 담당자나 국세상담센터(126)</b>에 한 번 확인하세요.</p>
+    <p>계산에는 본인·배우자 의료비만 반영했어요. 배우자·부양가족 일반 의료비는 연 700만원 한도가 있고, 미숙아·선천성이상아(20%)는 따로 계산돼요.</p>
+  </section>
+
+  <!-- 8. 다음 도구 -->
   <a class="next-card" href="../weight/">
-    <div class="next-icon">📈</div>
+    <div class="next-icon">🤰</div>
     <div>
       <div class="next-title">임신 중 적정 체중 증가 계산기</div>
-      <div class="next-sub">예정일만 넣으면 내 BMI 곡선 위에 지금 위치가</div>
+      <div class="next-sub">예정일만 넣으면 지금 주수·권장 범위</div>
+    </div>
+    <div class="next-arrow">›</div>
+  </a>
+  <a class="next-card" href="../">
+    <div class="next-icon">🍼</div>
+    <div>
+      <div class="next-title">친정엄마 산후도우미 계산기</div>
+      <div class="next-sub">출산 후 지원금·본인부담금 30초 계산</div>
     </div>
     <div class="next-arrow">›</div>
   </a>
 
-  <section class="disclaimer">
-    <div class="t">꼭 읽어 주세요</div>
-    2026년 귀속(2027년 1~2월 정산) 기준으로 소득세법·시행령과 국세청 안내를 정리한 <b>참고용 계산기</b>예요. 의료비 세액공제는 총급여의 3%를 넘는 금액의 15%(난임시술비 30%, 미숙아·선천성이상아 20%)이고, 산후조리원비는 출산 1회당 200만원까지 인정돼요. 실제 공제는 부양가족 구성·다른 공제·산출세액에 따라 달라지니, 최종 판단은 회사 연말정산 담당자나 국세상담센터(126)에서 확인해 주세요. 저는 세무사가 아니에요.
-  </section>
-
   <footer>
     <a class="handle" href="https://www.instagram.com/ddokdi.kim/" target="_blank" rel="noopener">@ddokdi.kim</a>
+    <div class="fnav">
+      <a href="../weight/">임신 체중 계산기</a> · <a href="../">산후도우미 계산기</a>
+    </div>
     <div class="src">
-      근거: 소득세법 제59조의4 · 시행령 제118조의5 · 조세특례제한법 제92조 · 국세청 연말정산 안내
+      소득세법 §59의4 · 시행령 §118의5 · 조세특례제한법 §92 · 국세청 연말정산 안내 기준<br />
+      계산기는 참고용이며 세무 자문이 아니에요.
     </div>
   </footer>
-
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 (function () {
-  "use strict";
+  'use strict';
 
-  var CAP_CARE = 200;      // 산후조리원 출산 1회당 한도(만원)
-  var RATE = 0.15;         // 의료비 세액공제율
-  var RATE_LOCAL = 0.165;  // 지방소득세 포함
-  var EL = function (id) { return document.getElementById(id); };
+  var $ = function (s) { return document.querySelector(s); };
+  var MAN = 10000;
 
-  function won(n) {
-    if (!isFinite(n)) return "—";
-    if (n === 0) return "0원";
-    if (n < 1) return Math.round(n * 10000).toLocaleString("ko-KR") + "원";
-    var r = Math.round(n * 10) / 10;
-    return (r % 1 === 0 ? r.toLocaleString("ko-KR") : r.toFixed(1)) + "만원";
+  /* ---------- 숫자 포맷 ---------- */
+  function roundWon(n) { return Math.round(n); }
+  function fmtWon(n) {
+    var v = roundWon(n);
+    return v.toLocaleString('ko-KR') + '원';
+  }
+  function fmtShort(n) {
+    var v = roundWon(n);
+    if (v >= 100000000) return (Math.round(v / 10000000) / 10) + '억원';
+    if (v >= 10000) return (Math.round(v / 1000) / 10) + '만원';
+    return v.toLocaleString('ko-KR') + '원';
+  }
+  function fmtMan(n) { return n.toLocaleString('ko-KR') + '만원'; }
+  function num(v) {
+    if (v === null || v === undefined) return null;
+    var s = String(v).replace(/,/g, '').trim();
+    if (!s) return null;
+    var n = parseFloat(s);
+    return isFinite(n) && n >= 0 ? n : null;
   }
 
-  var gross = EL("gross"), hosp = EL("hosp"), care = EL("care");
+  /* ---------- 상태 ---------- */
+  var LS_KEY = 'ddokdi_tax_v1';
+  var LS_CHECK = 'ddokdi_tax_check_v1';
+  var state = { gross: '', spouse: '', spousePaid: '', med: '', inf: '', care: '', single: false };
 
-  function num(el) {
-    var v = parseFloat(el.value);
-    return isFinite(v) && v > 0 ? v : 0;
+  var FIELDS = ['gross', 'spouse', 'spousePaid', 'med', 'inf', 'care'];
+
+  function loadState() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (!raw) return;
+      var o = JSON.parse(raw);
+      if (!o || typeof o !== 'object') return;
+      FIELDS.forEach(function (k) {
+        if (o[k] != null) state[k] = String(o[k]);
+      });
+      state.single = !!o.single;
+    } catch (e) {}
   }
+  function saveState() {
+    try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function applyStateToInputs() {
+    FIELDS.forEach(function (k) {
+      var el = document.getElementById(k === 'spousePaid' ? 'spouse-paid' : k);
+      if (el) el.value = state[k] || '';
+    });
+    $('#single').checked = state.single;
+    syncSingle();
+  }
+  function syncSingle() {
+    var on = $('#single').checked;
+    state.single = on;
+    var sp = $('#spouse');
+    sp.disabled = on;
+    if (on) sp.value = '';
+    $('#spouse-paid-wrap').hidden = on || !num(sp.value);
+    if (on) { state.spouse = ''; state.spousePaid = ''; $('#spouse-paid').value = ''; }
+  }
+
+  /* ---------- 계산 ---------- */
+  var LIMIT_CARE = 200; // 만원, 출산 1회당
 
   function calc() {
-    var g = num(gross), h = num(hosp), c = num(care);
-    var careUse = Math.min(c, CAP_CARE);
-    var eligible = careUse + h;
-    var thr = g * 0.03;
-    var excess = Math.max(0, eligible - thr);
-    var save = excess * RATE;
-    var saveLocal = excess * RATE_LOCAL;
+    var gross = num($('#gross').value);
+    var spouseGross = $('#single').checked ? 0 : num($('#spouse').value);
+    var med = num($('#med').value) || 0;
+    var inf = num($('#inf').value) || 0;
+    var care = num($('#care').value) || 0;
+    var spousePaid = num($('#spouse-paid').value) || 0;
 
-    // 계산 근거
-    EL("r-thr").textContent = g ? won(thr) : "—";
-    EL("r-eligible").textContent = (g || h || c) ? won(eligible) : "—";
-    EL("r-excess").textContent = g ? won(excess) : "—";
-    EL("r-save").textContent = g ? won(save) : "—";
-    EL("r-save2").textContent = g ? won(saveLocal) : "—";
+    if (gross === null || gross <= 0) return null;
 
-    // 조리원 200만원 초과 안내
-    if (c > CAP_CARE) {
-      EL("care-hint").innerHTML = "200만원까지만 인정돼요. <b>" + won(c - CAP_CARE) + "은 빠져요.</b>";
-    } else {
-      EL("care-hint").innerHTML = "아직 안 냈으면 <b>낼 예정 금액</b>을 넣어 보세요.";
+    var threshold = gross * MAN * 0.03;
+    var careUsed = Math.min(care, LIMIT_CARE) * MAN;
+    var medWon = med * MAN;
+    var infWon = inf * MAN;
+
+    var general = medWon + careUsed;   // 일반 의료비(본인)
+    var total = general + infWon;
+
+    // 소득세법 §59의4②: 일반 의료비에서 3%를 먼저 빼고, 모자란 만큼만 난임시술비에서 뺀다.
+    var genBase = Math.max(0, general - threshold);
+    var shortfall = Math.max(0, threshold - general);
+    var infBase = Math.max(0, infWon - shortfall);
+
+    var taxGen = genBase * 0.15;
+    var taxInf = infBase * 0.30;
+    var tax = taxGen + taxInf;
+
+    // 부부 비교
+    var couple = null;
+    if (spouseGross !== null && spouseGross > 0) {
+      var sPaidWon = spousePaid * MAN;
+      couple = {
+        myThreshold: threshold,
+        myGap: Math.max(0, threshold - general),
+        spThreshold: spouseGross * MAN * 0.03,
+        spGap: Math.max(0, spouseGross * MAN * 0.03 - sPaidWon),
+        spGross: spouseGross,
+        spPaid: spousePaid
+      };
     }
 
-    var hero = EL("hero");
-    var badge = EL("hero-badge");
-    var cap = EL("hero-cap");
-    var main = EL("hero-main");
-    var sub = EL("hero-sub");
-    var note = EL("hero-note");
-    var foot = EL("hero-foot");
-    var bar = EL("bar");
-    var barRight = EL("bar-cap-right");
+    return {
+      gross: gross, spouseGross: spouseGross || 0,
+      threshold: threshold,
+      general: general, inf: infWon, total: total,
+      careUsed: careUsed, care: care,
+      careRoom: Math.max(0, LIMIT_CARE - care) * MAN,
+      genBase: genBase, infBase: infBase,
+      taxGen: taxGen, taxInf: taxInf, tax: tax,
+      excess: Math.max(0, total - threshold),
+      shortfall: Math.max(0, threshold - total),
+      couple: couple
+    };
+  }
 
-    EL("m-thr").textContent = g ? won(thr) : "—";
-    EL("m-eligible").textContent = (g || h || c) ? won(eligible) : "—";
-    EL("m-save").textContent = g ? won(save) : "—";
-    barRight.textContent = g ? won(thr) : "문턱";
-
-    if (!g) {
-      hero.className = "hero empty";
-      badge.className = "hero-badge";
-      badge.textContent = "3초면 끝나요";
-      cap.textContent = "내 3% 문턱";
-      main.textContent = "총급여를 넣어 주세요";
-      sub.textContent = "총급여만 넣어도 문턱이 나와요";
-      note.textContent = "총급여를 넣으면 3% 문턱부터 알려드려요.";
-      foot.textContent = "2026년 귀속 · 의료비 세액공제 15% 기준";
-      bar.style.width = "0%";
-      highlightRow(null);
+  /* ---------- 렌더: 히어로 ---------- */
+  function renderHero(r) {
+    var hero = $('#hero');
+    if (!r) {
+      hero.className = 'hero empty';
+      $('#hero-badge').textContent = '30초 진단';
+      $('#hero-cap').textContent = '총급여의 3%가 문턱이에요';
+      $('#hero-big').textContent = '총급여를 넣어 주세요';
+      $('#hero-status').textContent = '내 문턱과 예상 세액공제를 바로 계산해 드려요';
+      $('#hero-tax').textContent = '—';
+      $('#hero-tax2').textContent = '—';
+      $('#hero-note').textContent = '실제 환급액은 그해 낸 세금(결정세액)을 넘지 않아요.';
+      $('#hero-foot').textContent = '';
       return;
     }
 
-    hero.className = "hero";
-    var pct = thr > 0 ? Math.min(100, (eligible / thr) * 100) : 100;
-    bar.style.width = pct.toFixed(1) + "%";
+    var over = r.total > r.threshold;
+    var exact = !over && r.total >= r.threshold && r.total > 0;
+    hero.className = 'hero' + (over ? ' over' : '');
 
-    if (eligible > thr) {
-      badge.className = "hero-badge ok";
-      badge.textContent = "문턱 넘었어요";
-      cap.textContent = "올해 연말정산에서 돌려받는 세금";
-      main.textContent = won(save);
-      sub.textContent = "지방소득세까지 하면 " + won(saveLocal);
-      note.innerHTML = "<b>12월 31일 전에</b> 조리원 계약금을 내면 올해 의료비로 넣을 수 있어요. 이미 냈다면 영수증만 챙기세요.";
-      foot.textContent = "인정 의료비 " + won(eligible) + " − 문턱 " + won(thr) + " = " + won(excess) + " × 15%";
+    $('#hero-cap').textContent = '총급여 ' + fmtMan(r.gross) + '의 3% 문턱';
+    $('#hero-big').textContent = fmtWon(r.threshold);
+
+    if (r.total <= 0) {
+      $('#hero-badge').textContent = '아직 0원';
+      $('#hero-status').textContent = '올해 낸 병원비를 넣으면 문턱을 넘었는지 알려드려요';
+    } else if (over) {
+      $('#hero-badge').textContent = '문턱 넘었어요 ✓';
+      $('#hero-status').innerHTML = '공제 대상 의료비 <span class="num">' + fmtShort(r.total) + '</span> · 문턱보다 ' + fmtShort(r.excess) + ' 초과';
+    } else if (exact) {
+      $('#hero-badge').textContent = '딱 문턱';
+      $('#hero-status').innerHTML = '문턱과 똑같아요. <b>한 푼만 더</b> 쓰면 그때부터 15%가 시작돼요';
     } else {
-      badge.className = "hero-badge no";
-      badge.textContent = "아직 문턱 아래";
-      cap.textContent = "문턱까지 남은 금액";
-      main.textContent = won(thr - eligible);
-      sub.textContent = "이만큼 더 쓰면 공제가 시작돼요";
-      note.innerHTML = (c > 0 || h > 0)
-        ? "올해 3%를 못 넘을 것 같으면 <b>조리원 잔금은 1월(분만비와 함께)</b>로 미루는 게 유리해요. 12월 병원비·치과·안경은 문턱을 넘길 수 있는 쪽 카드로 모으세요."
-        : "<b>조리원 계약금</b>을 넣어 보세요. 200만원까지 의료비로 인정돼서 문턱을 넘기는 데 제일 큰 카드예요.";
-      foot.textContent = "인정 의료비 " + won(eligible) + " · 문턱 " + won(thr);
+      $('#hero-badge').textContent = '문턱까지 ' + fmtShort(r.shortfall);
+      $('#hero-status').innerHTML = '지금 <span class="num">' + fmtShort(r.total) + '</span> 모았어요 · ' + fmtShort(r.shortfall) + ' 더 쓰면 공제 시작';
     }
 
-    highlightRow(g);
+    $('#hero-tax').innerHTML = r.tax > 0 ? fmtShort(r.tax) : '0원';
+    $('#hero-tax2').innerHTML = r.tax > 0 ? fmtShort(r.tax * 1.1) + '<small> 포함</small>' : '0원';
+
+    if (r.tax <= 0) {
+      $('#hero-note').textContent = r.total > 0
+        ? '아직 문턱을 못 넘어서 세액공제는 0원이에요. 12월에 어차피 낼 병원비가 있다면 이번 달에 모아보세요.'
+        : '의료비를 넣으면 예상 세액공제까지 계산해 드려요.';
+    } else {
+      var parts = [];
+      if (r.genBase > 0) parts.push('일반 의료비 ' + fmtShort(r.genBase) + ' × 15% = ' + fmtShort(r.taxGen));
+      if (r.infBase > 0) parts.push('난임시술비 ' + fmtShort(r.infBase) + ' × 30% = ' + fmtShort(r.taxInf));
+      $('#hero-note').textContent = parts.join(' + ') + ' (소득세 기준)';
+    }
+
+    var foot = [];
+    if (r.care > LIMIT_CARE) foot.push('조리원비는 200만원까지만 인정돼서 ' + fmtMan(r.care - LIMIT_CARE) + '은 빠졌어요');
+    $('#hero-foot').textContent = foot.join(' · ');
   }
 
-  function highlightRow(g) {
-    var rows = document.querySelectorAll("#gross-table tbody tr");
-    rows.forEach(function (tr) { tr.classList.remove("me"); });
-    if (!g) return;
-    var best = null, bestDiff = Infinity;
-    rows.forEach(function (tr) {
-      var v = parseFloat(tr.getAttribute("data-gross"));
-      var d = Math.abs(v - g);
-      if (d < bestDiff) { bestDiff = d; best = tr; }
-    });
-    if (best && bestDiff <= 500) best.classList.add("me");
+  /* ---------- 렌더: 추천 3가지 ---------- */
+  function renderRec(r) {
+    var box = $('#rec-list');
+    var html = '';
+
+    if (!r) {
+      html += recItem('💳', '12월 병원비, 누구 카드로?', 'gray', '총급여를 넣으면 맞벌이일 때 어느 쪽 카드로 모으는 게 유리한지 알려드려요.');
+      html += recItem('🏥', '조리원 잔금, 올해 vs 내년', 'gray', '계약금을 넣으면 잔금 타이밍까지 계산해 드려요.');
+      html += recItem('👶', '아기 공제는 내년 몫', 'gray', '12월 31일 기준 주민등록번호가 있어야 인정돼요. 2027년 3월 출산이면 2027년 연말정산이에요.');
+      box.innerHTML = html;
+      return;
+    }
+
+    /* 1) 맞벌이 카드 */
+    var c = r.couple;
+    var t1, b1, tag1 = '카드';
+    if (!c) {
+      t1 = '외벌이 · 내 카드로 모으면 돼요';
+      b1 = '12월에 어차피 낼 병원비·치과·안경은 <b>내 카드로</b> 결제하세요. 총급여 3%인 <span class="hl">' + fmtShort(r.threshold) + '</span>를 넘는 금액부터 15%가 돌아와요.';
+    } else if (c.myGap <= 0 && c.spGap <= 0) {
+      t1 = '두 분 다 이미 문턱을 넘었어요';
+      b1 = '12월 결제는 어느 카드로 해도 15% 그대로예요. 굳이 몰아줄 필요 없고, <b>세금을 더 많이 내는 쪽</b>(총급여가 높은 쪽)에 몰면 환급 여지가 조금 더 커요.';
+      tag1 = '둘 다 초과';
+    } else if (c.myGap <= 0) {
+      t1 = '내 카드가 유리해요';
+      b1 = '내 쪽은 이미 문턱을 넘어서 <b>쓴 만큼 바로 15%</b>가 붙어요. 배우자는 문턱까지 ' + fmtShort(c.spGap) + ' 남아서, 그만큼은 공제 0원이에요.';
+      tag1 = '내 쪽 초과';
+    } else if (c.spGap <= 0) {
+      t1 = '배우자 카드가 유리해요';
+      b1 = '배우자는 이미 문턱(' + fmtShort(c.spThreshold) + ')을 넘어 <b>쓴 만큼 바로 15%</b>예요. 내 쪽은 ' + fmtShort(c.myGap) + '을 더 써야 공제가 시작돼요.';
+      tag1 = '배우자 초과';
+    } else {
+      var near = c.myGap <= c.spGap;
+      t1 = (near ? '내 카드' : '배우자 카드') + '로 모아보세요';
+      b1 = '둘 다 아직 문턱 아래예요. ' + (near
+        ? '내 쪽이 ' + fmtShort(c.myGap) + ', 배우자가 ' + fmtShort(c.spGap) + ' 남았어요.'
+        : '배우자가 ' + fmtShort(c.spGap) + ', 내 쪽이 ' + fmtShort(c.myGap) + ' 남았어요.') +
+        ' 12월에 남은 병원비가 <b>' + fmtShort(Math.min(c.myGap, c.spGap)) + '보다 많다면</b> 가까운 쪽으로 몰아서 문턱을 넘기고, 그보다 적으면 올해는 공제 0원이에요.';
+      tag1 = '문턱 아래';
+    }
+    html += recItem('💳', t1, tag1, b1);
+
+    /* 2) 조리원 잔금 */
+    var t2, b2, tag2 = '조리원';
+    if (r.care > 0 && r.careRoom <= 0) {
+      t2 = '조리원 200만원 한도를 채웠어요';
+      b2 = '이미 낸 금액으로 <b>출산 1회당 200만원</b>을 다 썼어요. 잔금을 올해 내든 내년 내든 세액공제는 더 늘지 않아요. 현금 사정대로 하세요.';
+      tag2 = '한도 소진';
+    } else if (r.shortfall <= 0 && r.total > 0) {
+      t2 = '잔금은 올해 내는 게 이득이에요';
+      b2 = '이미 문턱을 넘었으니, 잔금 중 남은 한도 <span class="hl">' + fmtShort(r.careRoom) + '</span>을 올해 결제하면 <b>약 ' + fmtShort(r.careRoom * 0.15) + '</b>을 더 돌려받아요(15%). 내년에 낼 분만비로 어차피 문턱을 넘을 것 같으면 내년에 내도 결과는 같아요.';
+      tag2 = '올해 유리';
+    } else if (r.shortfall > 0 && r.careRoom >= r.shortfall) {
+      t2 = '잔금 일부를 12월에 내면 문턱을 넘어요';
+      b2 = '문턱까지 <span class="hl">' + fmtShort(r.shortfall) + '</span> 남았어요. 잔금을 올해 다 내면(최대 ' + fmtShort(r.careRoom) + ') <b>약 ' + fmtShort((r.careRoom - r.shortfall) * 0.15) + '</b>이 세금에서 빠져요. 넘는 순간부터 15%가 시작되니까요.';
+      tag2 = '12월 추천';
+    } else if (r.shortfall > 0) {
+      t2 = '잔금은 내년에 내는 편이 나아요';
+      b2 = '남은 한도(' + fmtShort(r.careRoom) + ')를 다 올해 내도 문턱에 <b>' + fmtShort(r.shortfall - r.careRoom) + ' 못 미쳐요</b>. 올해는 공제 0원이에요. 내년엔 분만비·신생아 진료비가 쌓여 문턱을 쉽게 넘으니, 잔금은 내년에 내는 쪽이 나아요.';
+      tag2 = '내년 추천';
+    } else {
+      t2 = '조리원 계약금을 넣어보세요';
+      b2 = '조리원비는 <b>출산 1회당 200만원</b>까지 의료비로 인정되고, 연봉 제한도 없어요. 계약금을 넣으면 잔금 타이밍까지 계산해 드려요.';
+      tag2 = '계산 전';
+    }
+    html += recItem('🏥', t2, tag2, b2);
+
+    /* 3) 아기·혼인 */
+    var t3 = '아기 공제는 내년 몫이에요';
+    var b3 = '12월 31일 기준 <b>주민등록번호가 있어야</b> 기본공제(1명 150만원)와 출산세액공제(첫째 30만원)를 받아요. 2027년 3월 출산이면 2027년 연말정산에서 받아요. 올해는 태아라 해당 없음!';
+    b3 += '<br /><br />혼인신고를 아직 안 했다면 <b>12월 31일이 막차</b>예요. 혼인세액공제 1인당 50만원, 부부 합쳐 최대 100만원이에요(생애 1회 · 소득·나이 제한 없음).';
+    html += recItem('💍', t3, '내년·12/31', b3);
+
+    box.innerHTML = html;
   }
 
-  // 총급여별 표
-  (function buildTable() {
-    var tbody = document.querySelector("#gross-table tbody");
-    var list = [3000, 4000, 5000, 6000, 7000];
+  function recItem(icon, title, tag, body) {
+    var gray = (tag === '계산 전');
+    return '<div class="rec-item">' +
+      '<div class="rec-top"><span class="rec-icon">' + icon + '</span>' +
+      '<span class="rec-title">' + title + '</span>' +
+      '<span class="rec-tag' + (gray ? ' gray' : '') + '">' + tag + '</span></div>' +
+      '<div class="rec-body">' + body + '</div></div>';
+  }
+
+  /* ---------- 렌더: 숫자 요약 ---------- */
+  function renderInfo(r) {
+    var box = $('#info-grid');
+    if (!r) {
+      box.innerHTML =
+        row('내 3% 문턱', '—', '총급여를 넣으면 계산') +
+        row('공제 대상 의료비', '—', '바우처·실손 뺀 금액') +
+        row('예상 세액공제', '—', '소득세 기준');
+      return;
+    }
+    var rows = '';
+    rows += row('내 3% 문턱', fmtWon(r.threshold), '총급여 ' + fmtMan(r.gross) + ' × 3%');
+    rows += row('공제 대상 의료비', fmtWon(r.total),
+      '병원·약국 ' + fmtShort(r.general) + (r.inf ? ' + 난임 ' + fmtShort(r.inf) : ''));
+    if (r.care > 0) {
+      rows += row('조리원비 인정액', fmtWon(r.careUsed),
+        r.care > LIMIT_CARE ? '200만원 한도 적용' : '출산 1회 200만원 이내');
+    }
+    rows += row(r.shortfall > 0 ? '문턱까지 남은 금액' : '문턱 초과 금액',
+      fmtWon(r.shortfall > 0 ? r.shortfall : r.excess),
+      r.shortfall > 0 ? '이만큼 더 쓰면 공제 시작' : '넘은 금액의 15%(난임 30%)');
+    rows += row('예상 세액공제', fmtWon(r.tax), '소득세 기준');
+    rows += row('지방소득세 포함', fmtWon(r.tax * 1.1), '실효 16.5% · 난임 33%');
+    box.innerHTML = rows;
+
+    // 표
+    var tb = $('#ranges-table');
+    var list = [3000, 4000, 5000, 6000, 8000, 10000];
+    var h = '<thead><tr><th>총급여</th><th>3% 문턱</th><th>100만원 초과 시</th></tr></thead><tbody>';
     list.forEach(function (g) {
-      var thr = g * 0.03;
-      var eligible = CAP_CARE;
-      var excess = Math.max(0, eligible - thr);
-      var save = excess * RATE;
-      var tr = document.createElement("tr");
-      tr.setAttribute("data-gross", g);
-      tr.innerHTML =
-        "<td>" + g.toLocaleString("ko-KR") + "만원</td>" +
-        "<td>" + thr + "만원</td>" +
-        "<td>" + (excess > 0 ? won(excess) : "0원") + "</td>" +
-        "<td class=\"save\">" + won(save) + "</td>";
-      tbody.appendChild(tr);
+      var mine = Math.abs(g - r.gross) < 1;
+      h += '<tr><td class="' + (mine ? 'mine' : '') + '">' + fmtMan(g) + '</td>' +
+        '<td class="' + (mine ? 'mine' : '') + '">' + fmtShort(g * MAN * 0.03) + '</td>' +
+        '<td class="' + (mine ? 'mine' : '') + '">' + fmtShort(MAN * 0.15) + '</td></tr>';
     });
-  })();
+    h += '</tbody>';
+    tb.innerHTML = h;
+  }
 
-  // 체크리스트
+  function row(k, v, s) {
+    return '<div class="info-row"><span class="info-k">' + k + '</span>' +
+      '<span class="info-v">' + v + (s ? '<small>' + s + '</small>' : '') + '</span></div>';
+  }
+
+  function updateAll() {
+    var r = calc();
+    renderHero(r);
+    renderRec(r);
+    renderInfo(r);
+    return r;
+  }
+
+  /* ---------- 체크리스트 ---------- */
   var CHECKS = [
-    { g: 1, t: "올해 의료비 총액 확인", s: "홈택스 미리보기 · 카드사 앱" },
-    { g: 1, t: "국민행복카드로 낸 금액 제외", s: "국가가 낸 돈이라 내 의료비가 아니에요" },
-    { g: 1, t: "실손보험금 받은 금액 제외", s: "안 빼면 가산세·추징" },
-    { g: 1, t: "총급여 3% 넘겼는지 계산", s: "위 계산기에 넣으면 끝" },
-    { g: 1, t: "조리원 계약금, 12월 vs 1월 결정", s: "넘겼으면 12월 · 못 넘기면 잔금은 1월" },
-    { g: 1, t: "맞벌이면 12월 결제 카드 정하기", s: "병원비·치과·안경 → 문턱 넘기 쉬운 쪽" },
-    { g: 1, t: "(해당 시) 혼인신고는 12월 31일까지", s: "1인당 50만원 · 2026년 신고분까지" },
-    { g: 2, t: "1월 15일 간소화에서 조리원비 확인", s: "안 뜨면 조리원에 영수증 요청" },
-    { g: 2, t: "회사 제출 전 3% 다시 계산", s: "미리보기와 실제 금액이 다를 수 있어요" }
+    { id: 'c1', t: '12월 병원비는 유리한 쪽 카드로 결제했어요', s: '이미 문턱을 넘은 쪽, 또는 문턱에 가까운 쪽이에요' },
+    { id: 'c2', t: '국민행복카드 바우처·실손보험금을 의료비에서 뺐어요', s: '국가가 낸 돈·돌려받은 돈은 공제 대상이 아니에요' },
+    { id: 'c3', t: '산후조리원 계약금 영수증을 받아뒀어요', s: '산모 이름·금액·결제일이 보이는 영수증이에요' },
+    { id: 'c4', t: '난임시술비 영수증·진료확인서를 따로 모았어요', s: '해당 없다면 체크해 두세요 (공제율 30%)' },
+    { id: 'c5', t: '12월 31일 전 혼인신고를 마쳤어요', s: '혼인세액공제 1인당 50만원, 올해가 막차예요' }
   ];
-  var KEY = "ddokdi-tax-checklist-v1";
-  var saved = {};
-  try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { saved = {}; }
+
+  function loadChecks() {
+    var o = {};
+    try {
+      var raw = localStorage.getItem(LS_CHECK);
+      if (raw) o = JSON.parse(raw) || {};
+    } catch (e) {}
+    return o;
+  }
+  function saveChecks(o) {
+    try { localStorage.setItem(LS_CHECK, JSON.stringify(o)); } catch (e) {}
+  }
 
   function renderChecks() {
-    [1, 2].forEach(function (g) {
-      var box = EL("chk-list-" + g);
-      box.innerHTML = "";
-      CHECKS.forEach(function (item, i) {
-        if (item.g !== g) return;
-        var div = document.createElement("div");
-        div.className = "chk-item" + (saved[i] ? " on" : "");
-        div.setAttribute("role", "checkbox");
-        div.setAttribute("aria-checked", saved[i] ? "true" : "false");
-        div.setAttribute("tabindex", "0");
-        div.innerHTML = '<span class="chk-box"></span><span class="chk-text">' + item.t + "<small>" + item.s + "</small></span>";
-        function toggle() {
-          saved[i] = !saved[i];
-          div.classList.toggle("on", !!saved[i]);
-          div.setAttribute("aria-checked", saved[i] ? "true" : "false");
-          try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
-          updateProgress();
-        }
-        div.addEventListener("click", toggle);
-        div.addEventListener("keydown", function (ev) {
-          if (ev.key === " " || ev.key === "Enter") { ev.preventDefault(); toggle(); }
-        });
-        box.appendChild(div);
+    var o = loadChecks();
+    var box = $('#check-list');
+    var html = '';
+    var done = 0;
+    CHECKS.forEach(function (c) {
+      var on = !!o[c.id];
+      if (on) done++;
+      html += '<button class="check-row' + (on ? ' done' : '') + '" type="button" data-id="' + c.id + '" aria-pressed="' + on + '">' +
+        '<span class="check-box">✓</span>' +
+        '<span class="check-text"><span class="check-title">' + c.t + '</span>' +
+        '<span class="check-sub">' + c.s + '</span></span></button>';
+    });
+    box.innerHTML = html;
+    $('#check-count').textContent = done + ' / ' + CHECKS.length + ' 완료';
+    $('#bar-fill').style.width = (done / CHECKS.length * 100) + '%';
+
+    Array.prototype.forEach.call(box.querySelectorAll('.check-row'), function (btn) {
+      btn.addEventListener('click', function () {
+        var o2 = loadChecks();
+        var id = btn.getAttribute('data-id');
+        o2[id] = !o2[id];
+        saveChecks(o2);
+        renderChecks();
       });
     });
-    updateProgress();
-  }
-  function updateProgress() {
-    var done = CHECKS.reduce(function (acc, _, i) { return acc + (saved[i] ? 1 : 0); }, 0);
-    EL("chk-progress").textContent = done + "/" + CHECKS.length;
   }
 
-  // D-day
-  (function dday() {
-    var now = new Date();
-    var end = new Date(2026, 11, 31, 23, 59, 59);
-    var days = Math.ceil((end - now) / 86400000);
-    var el = EL("dday");
-    if (days > 0) {
-      el.innerHTML = "2026년 귀속 · <b>D-" + days + "</b>";
-    } else if (days === 0) {
-      el.innerHTML = "2026년 귀속 · <b>오늘이 마지막 날</b>";
+  /* ---------- 토스트 ---------- */
+  var toastTimer = null;
+  function toast(msg) {
+    var t = $('#toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { t.classList.remove('show'); }, 2200);
+  }
+
+  /* ---------- 결과 텍스트 ---------- */
+  function resultText(r) {
+    if (!r) return '';
+    var lines = [];
+    lines.push('[임산부 연말정산 30초 진단]');
+    lines.push('내 총급여 ' + fmtMan(r.gross) + ' → 3% 문턱 ' + fmtWon(r.threshold));
+    lines.push('공제 대상 의료비 ' + fmtWon(r.total) + (r.care > 0 ? ' (조리원비 ' + fmtShort(r.careUsed) + ' 포함)' : ''));
+    if (r.shortfall > 0) {
+      lines.push('→ 문턱까지 ' + fmtWon(r.shortfall) + ' 남았어요. 예상 세액공제 0원');
     } else {
-      el.innerHTML = "2026년 귀속 마감 · 2027년 귀속으로 계산돼요";
+      lines.push('→ 문턱을 ' + fmtWon(r.excess) + ' 넘었어요. 예상 세액공제 ' + fmtWon(r.tax) + ' (지방세 포함 ' + fmtWon(r.tax * 1.1) + ')');
     }
-  })();
+    var c = r.couple;
+    if (c) {
+      if (c.myGap <= 0 && c.spGap <= 0) lines.push('12월 결제: 둘 다 문턱 초과, 어느 카드든 15%');
+      else if (c.myGap <= 0) lines.push('12월 결제: 내 카드가 유리 (배우자는 ' + fmtShort(c.spGap) + ' 남음)');
+      else if (c.spGap <= 0) lines.push('12월 결제: 배우자 카드가 유리 (내 쪽 ' + fmtShort(c.myGap) + ' 남음)');
+      else lines.push('12월 결제: ' + (c.myGap <= c.spGap ? '내' : '배우자') + ' 카드로 몰아서 문턱 넘기기');
+    }
+    lines.push('내 숫자로 확인: https://kimddokdi.github.io/ddokdi-helper/tax/');
+    return lines.join('\n');
+  }
 
-  // 예시
-  EL("btn-example").addEventListener("click", function () {
-    gross.value = 5000;
-    hosp.value = 30;
-    care.value = 200;
-    calc();
-    document.getElementById("hero").scrollIntoView({ behavior: "smooth", block: "center" });
-  });
+  /* ---------- 이벤트 ---------- */
+  function bindFields() {
+    FIELDS.forEach(function (k) {
+      var el = document.getElementById(k === 'spousePaid' ? 'spouse-paid' : k);
+      if (!el) return;
+      el.addEventListener('input', function () {
+        state[k] = el.value;
+        saveState();
+        if (k === 'spouse') {
+          if (num(el.value)) { $('#single').checked = false; state.single = false; }
+          $('#spouse-paid-wrap').hidden = !num(el.value);
+        }
+        updateAll();
+      });
+      el.addEventListener('change', function () { updateAll(); });
+    });
 
-  [gross, hosp, care].forEach(function (el) {
-    el.addEventListener("input", calc);
-    el.addEventListener("change", calc);
-  });
+    $('#single').addEventListener('change', function () {
+      syncSingle();
+      saveState();
+      updateAll();
+    });
 
+    $('#btn-example').addEventListener('click', function () {
+      $('#single').checked = false;
+      state.single = false;
+      $('#spouse').disabled = false;
+      var ex = { gross: '5000', spouse: '3200', spousePaid: '0', med: '120', inf: '', care: '100' };
+      Object.keys(ex).forEach(function (k) {
+        var el = document.getElementById(k === 'spousePaid' ? 'spouse-paid' : k);
+        el.value = ex[k];
+        state[k] = ex[k];
+      });
+      $('#spouse-paid-wrap').hidden = false;
+      saveState();
+      updateAll();
+      toast('예시로 채웠어요. 내 숫자로 바꿔보세요!');
+    });
+
+    $('#btn-reset').addEventListener('click', function () {
+      saveChecks({});
+      renderChecks();
+      toast('체크리스트를 초기화했어요');
+    });
+
+    $('#btn-copy').addEventListener('click', function () {
+      var r = calc();
+      var txt = resultText(r);
+      if (!txt) { toast('총급여를 먼저 넣어 주세요'); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(function () {
+          toast('결과를 복사했어요. 카톡에 붙여넣으세요!');
+        }).catch(function () { fallbackCopy(txt); });
+      } else {
+        fallbackCopy(txt);
+      }
+    });
+
+    $('#btn-share').addEventListener('click', function () {
+      var r = calc();
+      var txt = resultText(r);
+      if (navigator.share) {
+        navigator.share({ title: '임산부 연말정산 30초 진단', text: txt, url: 'https://kimddokdi.github.io/ddokdi-helper/tax/' })
+          .catch(function () {});
+      } else {
+        fallbackCopy(txt);
+      }
+    });
+  }
+
+  function fallbackCopy(txt) {
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); toast('결과를 복사했어요. 카톡에 붙여넣으세요!'); }
+    catch (e) { toast('복사가 안 됐어요. 화면을 길게 눌러 복사해 주세요'); }
+    document.body.removeChild(ta);
+  }
+
+  /* ---------- 시작 ---------- */
+  loadState();
+  applyStateToInputs();
+  bindFields();
   renderChecks();
-  calc();
+  updateAll();
 })();
 </script>
 </body>
