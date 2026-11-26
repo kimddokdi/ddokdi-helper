@@ -84,9 +84,9 @@
     .hint b { color: var(--accent); }
 
     /* ---------- 예정일 ---------- */
-    .edd-row { display: flex; gap: 8px; align-items: center; }
+    .edd-row { display: flex; flex-direction: column; gap: 8px; }
     .input {
-      flex: 1; min-width: 0; height: 48px;
+      width: 100%; min-width: 0; height: 48px;
       border: 1.5px solid var(--border);
       border-radius: 14px;
       background: #fff;
@@ -100,14 +100,15 @@
     .input[type="date"] { line-height: 48px; }
     .input[type="date"]::-webkit-date-and-time-value { text-align: left; }
     .input[type="date"]::-webkit-calendar-picker-indicator { opacity: .45; }
+    .edd-actions { display: flex; gap: 8px; }
     .mini {
-      flex: none; height: 48px; padding: 0 13px;
-      border: none; border-radius: 14px;
+      flex: 1; height: 40px; padding: 0 13px;
+      border: none; border-radius: 12px;
       background: var(--primary-soft); color: var(--accent);
-      font-family: inherit; font-size: 12px; font-weight: 800;
+      font-family: inherit; font-size: 12.5px; font-weight: 800;
       letter-spacing: -0.01em; cursor: pointer; white-space: nowrap;
     }
-    .mini.ghost { background: #fff; border: 1.5px solid var(--border); color: var(--faint); padding: 0 12px; font-size: 13px; }
+    .mini.ghost { flex: none; background: #fff; border: 1px solid var(--border); color: var(--muted); padding: 0 14px; font-size: 12.5px; }
     .mini:active { opacity: .65; }
 
     /* ---------- hero (지금 내 시기) ---------- */
@@ -346,8 +347,10 @@
     </div>
     <div class="edd-row">
       <input class="input" type="date" id="edd" aria-label="출산예정일" />
-      <button class="mini" id="btn-example" type="button">예시로 채우기</button>
-      <button class="mini ghost" id="btn-clear-edd" type="button" aria-label="예정일 지우기" hidden>✕</button>
+      <div class="edd-actions">
+        <button class="mini" id="btn-example" type="button">예시로 채우기</button>
+        <button class="mini ghost" id="btn-clear-edd" type="button" hidden>예정일 지우기</button>
+      </div>
     </div>
     <p class="hint">넣으면 <b>지금 주수·D-day</b>와 지금 챙길 일이 위에 떠요. 넣지 않아도 아래 전체 로드맵은 그대로 볼 수 있어요.</p>
   </section>
