@@ -468,7 +468,7 @@
     { id: 'e4', ph: 'early', s: 7, e: 9, cat: 'admin', key: true,
       t: '정부24 맘편한 임신 원스톱 신청',
       d: '국민행복카드(진료비 100만 원)·엽산제·철분제·KTX/SRT 임산부 할인을 한 번에 신청해요.',
-      link: { h: 'https://www.gov.kr/portal/onestopSvc/happyBirth', t: '정부24에서 확인' } },
+      link: { h: 'https://www.gov.kr/portal/service/serviceInfo/174100000015', t: '정부24에서 확인' } },
     { id: 'e5', ph: 'early', s: 8, e: 10, cat: 'admin',
       t: '보건소 임산부 등록',
       d: '표준모자보건수첩과 지자체 혜택(엽산·철분제, 임산부 배지·주차증 등)을 확인해요.' },
@@ -732,12 +732,18 @@
     $('#pct').textContent = pct + '%';
 
     PHASES.forEach(function (ph) {
-      var arr = ITEMS.filter(function (i) { return i.ph === ph.key; });
-      var d = arr.filter(function (i) { return state.checks[i.id]; }).length;
-      var el = document.getElementById('pcount-' + ph.key);
-      if (el) el.innerHTML = '<b>' + d + '</b> / ' + arr.length;
+      updatePhaseCount(ph.key);
     });
     save();
+  }
+
+  function updatePhaseCount(key) {
+    var arr = ITEMS.filter(function (i) {
+      return i.ph === key && (state.filter === 'all' || i.cat === state.filter);
+    });
+    var d = arr.filter(function (i) { return state.checks[i.id]; }).length;
+    var el = document.getElementById('pcount-' + key);
+    if (el) el.innerHTML = '<b>' + d + '</b> / ' + arr.length;
   }
 
   /* ---------- 필터 ---------- */
@@ -755,6 +761,7 @@
       if (!sec) return;
       var any = sec.querySelector('.item:not(.hide)');
       sec.classList.toggle('hide', !any);
+      updatePhaseCount(ph.key);
     });
     $('#shown').textContent = state.filter === 'all'
       ? '체크는 이 기기에 저장돼요'
